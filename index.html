@@ -8,6 +8,69 @@
 body{margin:0}
 img{max-width:100%}
 [hidden]{display:none!important}
+
+/* ---- Sub navigation (per task / per part) ---- */
+.subnav { display: flex; flex-wrap: wrap; gap: 6px; }
+.sbtn {
+  font: 600 .9rem/1 var(--f-display); cursor: pointer; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 4px; padding: 11px 15px;
+}
+.sbtn:hover { border-color: var(--ink-2); }
+.sbtn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.subnav.inner .sbtn { padding: 9px 13px; font-size: .86rem; }
+.subnav.inner .sbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.subpanel > * + * { margin-top: 18px; }
+.subpanel > h2 { margin-top: 36px; }
+.subpanel > h2:first-child { margin-top: 0; }
+
+/* ---- Writing Task 2 ---- */
+.typebar { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); }
+.tbtn {
+  text-align: left; cursor: pointer; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 4px; padding: 11px 13px; display: flex; flex-direction: column; gap: 3px; min-width: 0;
+}
+.tbtn b { font: 700 1rem/1.2 var(--f-display); }
+.tbtn span { font: 400 .76rem/1.35 var(--f-mono); color: var(--ink-2); }
+.tbtn:hover { border-color: var(--ink-2); }
+.tbtn[aria-pressed="true"] { border-color: var(--accent); background: var(--tint-a); }
+.tbtn[aria-pressed="true"] b { color: var(--accent); }
+.typehead { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+.typehead > * + * { margin-top: 8px; }
+.cue { font: 500 .8rem/1.55 var(--f-mono); color: var(--ink-2); }
+.map { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); margin-top: 14px; }
+.map div { border-top: 2px solid var(--accent); padding-top: 7px; min-width: 0; }
+.map b { display: block; font: 600 .72rem/1.2 var(--f-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--accent); }
+.map span { font-size: .9rem; color: var(--ink-2); display: block; margin-top: 3px; line-height: 1.4; }
+.view > * + * { margin-top: 14px; }
+.qitem { display: grid; grid-template-columns: 34px minmax(0, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; }
+.qitem + .qitem { margin-top: 8px; }
+.qi { font: 600 .95rem var(--f-mono); color: var(--accent); }
+.frame.wide .fr { grid-template-columns: 190px minmax(0, 1fr); }
+.fl small { display: block; font: 400 .72rem var(--f-mono); letter-spacing: 0; text-transform: none; color: var(--ink-2); margin-top: 3px; }
+@media (max-width: 560px) { .frame.wide .fr { grid-template-columns: minmax(0, 1fr); } }
+.tpl .ln { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 3px 12px; }
+.tpl .ln + .ln { margin-top: 8px; }
+.fn { font: 500 .68rem/1.9 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.from { font-size: .84rem; color: var(--ink-2); margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 8px; }
+@media (max-width: 560px) { .tpl .ln { grid-template-columns: minmax(0, 1fr); } }
+.eq { font: 500 1.08rem/1.5 var(--f-display); }
+.essaygrid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); grid-template-areas: "plan" "essay" "why"; align-items: start; }
+.essaygrid > * { min-width: 0; margin-top: 0 !important; }
+.g-plan { grid-area: plan; } .g-essay { grid-area: essay; } .g-why { grid-area: why; }
+@media (min-width: 900px) {
+  .essaygrid { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); grid-template-areas: "essay plan" "essay why"; }
+}
+.frame.essay .fr { grid-template-columns: 124px minmax(0, 1fr); }
+.frame.essay .fl { font-size: .72rem; line-height: 1.5; }
+.frame.essay .fd p { font-size: 1.03rem; line-height: 1.8; }
+@media (max-width: 560px) { .frame.essay .fr { grid-template-columns: minmax(0, 1fr); } }
+.reflist { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.reflist p { color: var(--ink-2); font-size: .93rem; }
+.reflist a { font-weight: 600; overflow-wrap: anywhere; }
+.plan { display: grid; gap: 3px; }
+.timebar { display: flex; gap: 3px; height: 12px; margin-top: 10px; }
+.timebar span { display: block; border-radius: 2px; }
+.tleg { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 8px; font: 400 .78rem var(--f-mono); color: var(--ink-2); }
 </style>
 <title>Catatan IELTS</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -237,7 +300,7 @@ details > .in > * + * { margin-top: 10px; }
 
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">Catatan pribadi · Academic &amp; General Training</p>
+    <p class="eyebrow">Catatan pribadi · IELTS Academic</p>
     <h1>Catatan <span class="hl">IELTS</span></h1>
     <p class="lede">Kerangka, template, dan contoh latihan yang ditulis ulang dari strategi sumber-sumber rujukan. Dibuka sebelum latihan atau sehari sebelum tes.</p>
   </div>
@@ -364,6 +427,13 @@ details > .in > * + * { margin-top: 10px; }
 <!-- ============ WRITING ============ -->
 <section class="panel" id="tab-writing" role="tabpanel" aria-labelledby="btn-writing" hidden>
   <div class="wrap">
+    <div class="subnav" data-group="writing" role="group" aria-label="Bagian Writing">
+      <button type="button" class="sbtn" data-for="writing-task1" aria-pressed="true">Task 1</button>
+      <button type="button" class="sbtn" data-for="writing-task2" aria-pressed="false">Task 2</button>
+      <button type="button" class="sbtn" data-for="writing-kriteria" aria-pressed="false">Kriteria &amp; bahasa</button>
+    </div>
+
+    <div class="subpanel" data-group="writing" id="writing-task1">
     <h2>Task 1 · Academic</h2>
     <p class="sub">Tugasnya melaporkan, bukan beropini. Lebar bar menunjukkan perkiraan porsi kata dari total ±170.</p>
 
@@ -414,63 +484,37 @@ details > .in > * + * { margin-top: 10px; }
         <div class="chips"><span class="chip">whereas</span><span class="chip">in contrast</span><span class="chip">compared with</span><span class="chip">twice as high as</span><span class="chip">account for</span><span class="chip">make up</span></div>
       </div>
     </div>
-
-    <h2>Task 1 · General Training (surat)</h2>
-    <div class="frame">
-      <div class="fr"><div class="fl">Salam</div><div class="fd"><p>Sesuaikan dengan penerima, lalu pasangkan dengan penutup yang benar.</p></div></div>
-      <div class="fr"><div class="fl">Tujuan</div><div class="fd"><p>Satu atau dua kalimat: kenapa menulis surat ini.</p></div></div>
-      <div class="fr"><div class="fl">Tiga poin</div><div class="fd"><p>Soal selalu memberi tiga poin. Satu paragraf pendek untuk tiap poin, lengkap dengan detail.</p></div></div>
-      <div class="fr"><div class="fl">Penutup</div><div class="fd"><p>Tindakan yang diharapkan dari penerima, lalu salam penutup.</p></div></div>
-    </div>
-    <div class="scroll tcard">
-      <table>
-        <thead><tr><th>Gaya</th><th>Salam</th><th>Penutup</th></tr></thead>
-        <tbody>
-          <tr><td>Formal</td><td>Dear Sir or Madam,</td><td>Yours faithfully,</td></tr>
-          <tr><td>Semi-formal</td><td>Dear Mr / Ms {{surname}},</td><td>Yours sincerely,</td></tr>
-          <tr><td>Informal</td><td>Dear {{first name}},</td><td>Best wishes, / Take care,</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="tpl" data-label="Pembuka">I am writing to {{complain about / enquire about / apologise for}} {{topic}}.</div>
-
-    <h2>Task 2 · Essay</h2>
-    <p class="sub">Bobot dua kali Task 1. Sisihkan 5 menit merencanakan, 30 menit menulis, 5 menit memeriksa.</p>
-
-    <div class="frame">
-      <div class="fr"><div class="fl">Intro</div><div class="fd">
-        <p>Parafrase isu, lalu tulis posisi atau gambaran isi esai.</p>
-        <div class="fbar"><b><i style="width:14%"></i></b><span>≈40 kata</span></div></div></div>
-      <div class="fr"><div class="fl">Body 1</div><div class="fd">
-        <p>Satu ide utama. Pola: Point → Explain → Example → Link.</p>
-        <div class="fbar"><b><i style="width:36%"></i></b><span>≈100 kata</span></div></div></div>
-      <div class="fr"><div class="fl">Body 2</div><div class="fd">
-        <p>Ide kedua, atau sisi lawan untuk soal discussion.</p>
-        <div class="fbar"><b><i style="width:36%"></i></b><span>≈100 kata</span></div></div></div>
-      <div class="fr"><div class="fl">Penutup</div><div class="fd">
-        <p>Tegaskan posisi dan rangkum alasan. Tanpa ide baru.</p>
-        <div class="fbar"><b><i style="width:14%"></i></b><span>≈40 kata</span></div></div></div>
     </div>
 
-    <div class="scroll tcard">
-      <table>
-        <thead><tr><th>Tipe soal</th><th>Kata kunci di soal</th><th>Isi body</th></tr></thead>
-        <tbody>
-          <tr><td>Opinion</td><td>To what extent do you agree?</td><td>Posisi konsisten dari intro sampai penutup; dua alasan terkuat.</td></tr>
-          <tr><td>Discussion</td><td>Discuss both views</td><td>Body 1 untuk pandangan A, body 2 untuk B, opini sendiri di intro dan penutup.</td></tr>
-          <tr><td>Problem–solution</td><td>What problems? What solutions?</td><td>Body 1 masalah dan penyebab, body 2 solusi yang menjawab masalah itu.</td></tr>
-          <tr><td>Advantages–disadvantages</td><td>Do the advantages outweigh…?</td><td>Satu body per sisi; sebut mana yang lebih berat bila diminta.</td></tr>
-          <tr><td>Two-part question</td><td>Dua pertanyaan terpisah</td><td>Satu body per pertanyaan, jawab langsung.</td></tr>
-        </tbody>
-      </table>
+    <div class="subpanel" data-group="writing" id="writing-task2" hidden>
+      <h2>Task 2 · Esai</h2>
+      <p class="sub">Pilih jenis soal, lalu buka tahapnya satu per satu: contoh soal, berpikir, menulis, dan esai contoh. Waktu kerja 40 menit.</p>
+      <div>
+        <div class="timebar" role="img" aria-label="5 menit berpikir, 30 menit menulis, 5 menit memeriksa">
+          <span class="s1" style="flex:5"></span><span class="s2" style="flex:30"></span><span class="s3" style="flex:5"></span>
+        </div>
+        <div class="tleg"><span>5 mnt · tahap 1 berpikir</span><span>30 mnt · tahap 2 menulis</span><span>5 mnt · memeriksa</span></div>
+      </div>
+      <details class="refs">
+        <summary>Esai dan panduan resmi untuk dibandingkan</summary>
+        <div class="in">
+          <p class="sub">Esai resmi berhak cipta, jadi tidak disalin ke sini. Baca langsung di sumbernya lalu bandingkan strukturnya dengan esai di halaman ini.</p>
+          <ul class="reflist" id="refs-body"></ul>
+        </div>
+      </details>
+      <div id="t2"><p class="sub">Memuat konten Task 2…</p></div>
     </div>
 
-    <div class="tpl" data-label="Intro (opinion)">In recent years, there has been growing debate over whether {{topic}}. While some people argue that {{view A}}, I believe that {{your position}}.</div>
-    <div class="tpl" data-label="Body">One major reason why {{claim}} is that {{reason}}. For instance, {{specific example}}. As a result, {{consequence}}.</div>
-    <div class="tpl" data-label="Concession">Admittedly, {{opposing point}}. However, {{why it does not change your position}}.</div>
-    <div class="tpl" data-label="Penutup">In conclusion, although {{counterpoint}}, I firmly believe that {{position}}, mainly because {{summary of reasons}}.</div>
+    <div class="subpanel" data-group="writing" id="writing-kriteria" hidden>
+    <h2>Empat kriteria</h2>
+    <div class="grid">
+      <div class="card"><p class="label">25%</p><h3>Task Achievement / Response</h3><p>Semua bagian soal terjawab. Task 1 punya overview; Task 2 punya posisi yang jelas dan contoh yang spesifik.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Coherence &amp; Cohesion</h3><p>Satu ide utama per paragraf. Pakai this, these, such agar tidak mengulang kata benda.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Lexical Resource</h3><p>Sinonim yang akurat dan kolokasi yang tepat (make a decision, bukan do a decision). Periksa ejaan.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Grammatical Range &amp; Accuracy</h3><p>Campur kalimat sederhana dan kompleks. Kontrol tense, artikel, dan kesesuaian subjek-kata kerja.</p></div>
+    </div>
 
-    <h3>Penghubung yang wajar dipakai</h3>
+    <h2>Penghubung yang wajar dipakai</h2>
     <div class="grid wide">
       <div class="card">
         <div class="chips"><span class="chip">In addition</span><span class="chip">Furthermore</span><span class="chip">For instance</span><span class="chip">A case in point is</span><span class="chip">As a result</span><span class="chip">Consequently</span></div>
@@ -480,14 +524,6 @@ details > .in > * + * { margin-top: 10px; }
       </div>
     </div>
     <p class="sub">Tidak perlu penghubung di awal setiap kalimat. Penghubung berlebihan malah menurunkan Coherence and Cohesion.</p>
-
-    <h2>Empat kriteria</h2>
-    <div class="grid">
-      <div class="card"><p class="label">25%</p><h3>Task Achievement / Response</h3><p>Semua bagian soal terjawab. Task 1 punya overview; Task 2 punya posisi yang jelas dan contoh yang spesifik.</p></div>
-      <div class="card"><p class="label">25%</p><h3>Coherence &amp; Cohesion</h3><p>Satu ide utama per paragraf. Pakai this, these, such agar tidak mengulang kata benda.</p></div>
-      <div class="card"><p class="label">25%</p><h3>Lexical Resource</h3><p>Sinonim yang akurat dan kolokasi yang tepat (make a decision, bukan do a decision). Periksa ejaan.</p></div>
-      <div class="card"><p class="label">25%</p><h3>Grammatical Range &amp; Accuracy</h3><p>Campur kalimat sederhana dan kompleks. Kontrol tense, artikel, dan kesesuaian subjek-kata kerja.</p></div>
-    </div>
 
     <h2>Cek lima menit terakhir</h2>
     <div class="card">
@@ -499,13 +535,21 @@ details > .in > * + * { margin-top: 10px; }
         <li>Subjek-kata kerja, artikel (a / the), dan tense sudah dibaca ulang?</li>
       </ul>
     </div>
+    </div>
   </div>
 </section>
 
 <!-- ============ SPEAKING ============ -->
 <section class="panel" id="tab-speaking" role="tabpanel" aria-labelledby="btn-speaking" hidden>
   <div class="wrap">
-    <h2>Part 1 · Perkenalan</h2>
+    <div class="subnav" data-group="speaking" role="group" aria-label="Bagian Speaking">
+      <button type="button" class="sbtn" data-for="speaking-0" aria-pressed="true">Part 1</button>
+      <button type="button" class="sbtn" data-for="speaking-1" aria-pressed="false">Part 2</button>
+      <button type="button" class="sbtn" data-for="speaking-2" aria-pressed="false">Part 3</button>
+      <button type="button" class="sbtn" data-for="speaking-3" aria-pressed="false">Kriteria</button>
+    </div>
+    <div class="subpanel" data-group="speaking" id="speaking-0">
+<h2>Part 1 · Perkenalan</h2>
     <p class="sub">4–5 menit, topik akrab: pekerjaan atau studi, rumah, hobi, makanan, rutinitas. Jawab dalam dua sampai tiga kalimat.</p>
 
     <div class="tpl" data-label="Pola A · R · E">{{Jawaban langsung}}. {{Alasan, mulai dengan because / mainly since}}. {{Contoh atau detail kecil}}.</div>
@@ -515,7 +559,10 @@ details > .in > * + * { margin-top: 10px; }
       <div class="key"><span class="s-a">Answer</span><span class="s-r">Reason</span><span class="s-e">Example</span></div>
     </div>
 
-    <h2>Part 2 · Kartu topik</h2>
+    
+    </div>
+    <div class="subpanel" data-group="speaking" id="speaking-1" hidden>
+<h2>Part 2 · Kartu topik</h2>
     <p class="sub">Satu menit menyiapkan catatan, lalu bicara satu sampai dua menit tanpa terputus. Tulis kata kunci saja, bukan kalimat.</p>
 
     <div class="card">
@@ -561,7 +608,10 @@ details > .in > * + * { margin-top: 10px; }
       </div>
     </details>
 
-    <h2>Part 3 · Diskusi</h2>
+    
+    </div>
+    <div class="subpanel" data-group="speaking" id="speaking-2" hidden>
+<h2>Part 3 · Diskusi</h2>
     <p class="sub">4–5 menit, topik meluas ke masyarakat. Jawaban lebih panjang dan beralasan, bukan cerita pribadi.</p>
 
     <div class="tpl" data-label="Pola P · E · E · L">{{Point: pendapat}}. {{Explain: kenapa}}. {{Example: contoh umum}}. {{Link: sisi lain atau kesimpulan}}.</div>
@@ -584,12 +634,16 @@ details > .in > * + * { margin-top: 10px; }
         <div class="stack"><p>What I mean is…</p><p>It’s a kind of…</p><p>Sorry, I mean…</p></div></div>
     </div>
 
-    <h2>Empat kriteria</h2>
+    
+    </div>
+    <div class="subpanel" data-group="speaking" id="speaking-3" hidden>
+<h2>Empat kriteria</h2>
     <div class="grid">
       <div class="card"><p class="label">25%</p><h3>Fluency &amp; Coherence</h3><p>Bicara mengalir dan jawaban berkembang. Jeda sesekali untuk berpikir wajar; mengulang-ulang kata yang sama tidak.</p></div>
       <div class="card"><p class="label">25%</p><h3>Lexical Resource</h3><p>Variasi kosakata dan kemampuan memparafrase. Satu idiom yang pas lebih baik daripada lima yang dipaksakan.</p></div>
       <div class="card"><p class="label">25%</p><h3>Grammatical Range &amp; Accuracy</h3><p>Pakai tense yang berbeda dan kalimat kompleks, dengan kesalahan yang tidak mengganggu makna.</p></div>
       <div class="card"><p class="label">25%</p><h3>Pronunciation</h3><p>Yang dinilai kejelasan, tekanan kata, dan intonasi. Aksen tertentu tidak dituntut.</p></div>
+    </div>
     </div>
   </div>
 </section>
@@ -597,7 +651,12 @@ details > .in > * + * { margin-top: 10px; }
 <!-- ============ READING ============ -->
 <section class="panel" id="tab-reading" role="tabpanel" aria-labelledby="btn-reading" hidden>
   <div class="wrap">
-    <h2>Strategi umum</h2>
+    <div class="subnav" data-group="reading" role="group" aria-label="Bagian Reading">
+      <button type="button" class="sbtn" data-for="reading-0" aria-pressed="true">Strategi</button>
+      <button type="button" class="sbtn" data-for="reading-1" aria-pressed="false">Latihan mini</button>
+    </div>
+    <div class="subpanel" data-group="reading" id="reading-0">
+<h2>Strategi umum</h2>
     <div class="grid">
       <div class="card"><h3>Atur waktu</h3><p>±20 menit per teks. Teks ketiga biasanya paling sulit, jadi jangan habiskan waktu di dua teks pertama.</p></div>
       <div class="card"><h3>Baca sekilas dulu</h3><p>Judul dan kalimat pertama tiap paragraf, maksimal dua menit. Detail dicari setelah membaca soal.</p></div>
@@ -620,7 +679,10 @@ details > .in > * + * { margin-top: 10px; }
       </table>
     </div>
 
-    <h2>Latihan mini</h2>
+    
+    </div>
+    <div class="subpanel" data-group="reading" id="reading-1" hidden>
+<h2>Latihan mini</h2>
     <p class="sub">Teks dan soal di bawah ditulis sendiri untuk melatih format, bukan salinan soal resmi. Untuk latihan waktu penuh, pakai tes resmi atau buku Cambridge IELTS.</p>
 
     <div class="split">
@@ -632,13 +694,19 @@ details > .in > * + * { margin-top: 10px; }
       </div>
       <div id="rq" class="quiz"></div>
     </div>
+    </div>
   </div>
 </section>
 
 <!-- ============ LISTENING ============ -->
 <section class="panel" id="tab-listening" role="tabpanel" aria-labelledby="btn-listening" hidden>
   <div class="wrap">
-    <h2>Empat bagian, makin sulit</h2>
+    <div class="subnav" data-group="listening" role="group" aria-label="Bagian Listening">
+      <button type="button" class="sbtn" data-for="listening-0" aria-pressed="true">Format &amp; strategi</button>
+      <button type="button" class="sbtn" data-for="listening-1" aria-pressed="false">Latihan mini</button>
+    </div>
+    <div class="subpanel" data-group="listening" id="listening-0">
+<h2>Empat bagian, makin sulit</h2>
     <div class="scroll tcard">
       <table>
         <thead><tr><th>Bagian</th><th>Isi</th><th>Soal yang sering muncul</th></tr></thead>
@@ -658,7 +726,10 @@ details > .in > * + * { margin-top: 10px; }
       <div class="card"><h3>Ejaan dan bentuk</h3><p>Perhatikan jamak, batas kata, dan format angka. Nama yang dieja biasanya harus tepat per huruf.</p></div>
     </div>
 
-    <h2>Latihan mini · Bagian 1</h2>
+    
+    </div>
+    <div class="subpanel" data-group="listening" id="listening-1" hidden>
+<h2>Latihan mini · Bagian 1</h2>
     <p class="sub">Dialog di bawah ditulis sendiri. Suaranya dari pembaca teks di browser, jadi aksennya tidak sama dengan tes asli. Di tes asli audio hanya diputar sekali.</p>
 
     <div class="card">
@@ -673,6 +744,7 @@ details > .in > * + * { margin-top: 10px; }
     </div>
 
     <div id="lq" class="quiz"></div>
+    </div>
   </div>
 </section>
 
@@ -725,6 +797,7 @@ details > .in > * + * { margin-top: 10px; }
 
 </main>
 
+<script src="content/writing-task2.js"></script>
 <script>
 (function () {
   function $(s, r) { return (r || document).querySelector(s); }
@@ -957,6 +1030,117 @@ details > .in > * + * { margin-top: 10px; }
       }, 1000);
     });
   });
+
+  /* Sub navigation for static panels */
+  $$('.subnav[data-group]').forEach(function (nav) {
+    var g = nav.getAttribute('data-group'), btns = $$('.sbtn', nav), key = 'catatan-ielts-sub-' + g;
+    function go(id) {
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-for') === id ? 'true' : 'false'); });
+      $$('.subpanel[data-group="' + g + '"]').forEach(function (p) { p.hidden = p.id !== id; });
+      try { localStorage.setItem(key, id); } catch (e) {}
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () { go(b.getAttribute('data-for')); }); });
+    var saved = '';
+    try { saved = localStorage.getItem(key) || ''; } catch (e) {}
+    var ok = btns.some(function (b) { return b.getAttribute('data-for') === saved; });
+    go(ok ? saved : btns[0].getAttribute('data-for'));
+  });
+
+  /* Writing Task 2 */
+  (function () {
+    var root = document.getElementById('t2'), DATA = window.WRITING_T2, REFS = window.WRITING_REFS || [];
+    if (!root) return;
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function slots(s) { return s.replace(/\{\{(.+?)\}\}/g, '<span class="slot">$1</span>'); }
+    function li(s) { return '<li>' + esc(s) + '</li>'; }
+
+    var rb = document.getElementById('refs-body');
+    if (rb) {
+      rb.innerHTML = REFS.map(function (r) {
+        return '<li>' + (r.u ? '<a href="' + esc(r.u) + '" target="_blank" rel="noopener noreferrer">' + esc(r.t) + '</a>' : '<b>' + esc(r.t) + '</b>') + '<p>' + esc(r.n) + '</p></li>';
+      }).join('');
+    }
+    if (!DATA || !DATA.length) {
+      root.innerHTML = '<p class="sub">Konten Task 2 tidak termuat. Pastikan file content/writing-task2.js ada di repositori.</p>';
+      return;
+    }
+
+    var VIEWS = ['q', 'think', 'write', 'e0', 'e1'];
+    var st = { t: 0, v: 'q' };
+    try {
+      var s = JSON.parse(localStorage.getItem('catatan-ielts-t2') || 'null');
+      if (s && typeof s.t === 'number' && s.t >= 0 && s.t < DATA.length && VIEWS.indexOf(s.v) > -1) st = s;
+    } catch (e) {}
+
+    function words(e) { return e.paras.map(function (p) { return p.t; }).join(' ').split(/\s+/).filter(Boolean).length; }
+
+    function viewQ(T) {
+      return '<div>' + T.questions.map(function (q, i) {
+        return '<div class="qitem"><span class="qi">' + (i + 1) + '</span><p>' + esc(q) + '</p></div>';
+      }).join('') + '</div>' +
+      '<div class="card"><p class="label">Cara berlatih</p><ul class="tips">' +
+      '<li>Pilih satu soal dan kerjakan tahap 1 selama 5 menit, tanpa menulis kalimat utuh.</li>' +
+      '<li>Ubah peta ide menjadi esai memakai template di tahap 2 (30 menit).</li>' +
+      '<li>Bandingkan dengan esai contoh. Lihat posisi, struktur paragraf, dan contoh yang dipakai.</li></ul></div>';
+    }
+    function viewThink(T) {
+      return '<div class="frame wide">' + T.thinking.map(function (s, i) {
+        return '<div class="fr"><div class="fl">' + (i + 1) + ' · ' + esc(s.t) + '<small>±' + esc(s.m) + '</small></div><div class="fd"><ul class="tips">' + s.q.map(li).join('') + '</ul></div></div>';
+      }).join('') + '</div>' +
+      '<div class="card"><p class="label">Hasil tahap ini</p><p>Peta empat baris, satu untuk tiap paragraf, lengkap dengan posisi, alasan, contoh, dan konsesi. Peta itulah yang dimasukkan ke slot template di tahap 2.</p></div>';
+    }
+    function viewWrite(T) {
+      var h = T.writing.map(function (b) {
+        return '<div class="tpl" data-label="' + esc(b.label) + '">' + b.lines.map(function (l) {
+          return '<div class="ln"><span class="fn">' + esc(l[0]) + '</span><span>' + slots(esc(l[1])) + '</span></div>';
+        }).join('') + '<p class="from">' + esc(b.from) + '</p></div>';
+      }).join('');
+      if (T.phrases && T.phrases.length) {
+        h += '<div class="grid wide">' + T.phrases.map(function (g) {
+          return '<div class="card"><p class="group-title">' + esc(g.t) + '</p><div class="chips">' + g.c.map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join('') + '</div></div>';
+        }).join('') + '</div>';
+      }
+      return h;
+    }
+    function viewEssay(T, i) {
+      var e = T.essays[i];
+      return '<div class="card"><p class="label">Soal · esai ' + (i + 1) + '</p><p class="eq">' + esc(e.q) + '</p></div>' +
+      '<div class="essaygrid">' +
+        '<div class="card g-plan"><p class="label">Hasil tahap 1 · peta ide</p><ul class="tips">' + e.plan.map(li).join('') + '</ul></div>' +
+        '<div class="g-essay"><div class="frame essay">' + e.paras.map(function (p) {
+          return '<div class="fr"><div class="fl">' + esc(p.r) + '</div><div class="fd"><p>' + esc(p.t) + '</p></div></div>';
+        }).join('') + '</div><p class="meta" style="margin-top:10px">' + words(e) + ' kata · ditulis mengacu pada deskriptor Band 9, bukan penilaian resmi</p></div>' +
+        '<div class="card g-why"><p class="label">Mengapa kuat</p><ul class="tips">' + e.why.map(li).join('') + '</ul></div>' +
+      '</div>';
+    }
+
+    function render() {
+      var T = DATA[st.t];
+      var views = [['q', 'Contoh soal'], ['think', '1 · Berpikir'], ['write', '2 · Menulis']].concat(T.essays.map(function (e, i) { return ['e' + i, 'Esai ' + (i + 1)]; }));
+      var body = st.v === 'q' ? viewQ(T) : st.v === 'think' ? viewThink(T) : st.v === 'write' ? viewWrite(T) : viewEssay(T, Number(st.v.slice(1)));
+      root.innerHTML =
+        '<div class="typebar" role="group" aria-label="Jenis soal">' + DATA.map(function (d, i) {
+          return '<button type="button" class="tbtn" data-type="' + i + '" aria-pressed="' + (i === st.t) + '"><b>' + esc(d.name) + '</b><span>' + esc(d.sub) + '</span></button>';
+        }).join('') + '</div>' +
+        '<div class="typehead"><p>' + esc(T.about) + '</p><p class="cue">' + esc(T.cue) + '</p>' +
+          '<div class="map">' + T.map.map(function (m) { return '<div><b>' + esc(m[0]) + '</b><span>' + esc(m[1]) + '</span></div>'; }).join('') + '</div></div>' +
+        '<div class="subnav inner" role="group" aria-label="Isi ' + esc(T.name) + '">' + views.map(function (v) {
+          return '<button type="button" class="sbtn" data-view="' + v[0] + '" aria-pressed="' + (v[0] === st.v) + '">' + esc(v[1]) + '</button>';
+        }).join('') + '</div>' +
+        '<div class="view">' + body + '</div>';
+    }
+    root.addEventListener('click', function (e) {
+      var tb = e.target.closest ? e.target.closest('[data-type]') : null;
+      var vb = e.target.closest ? e.target.closest('[data-view]') : null;
+      if (tb) { st.t = Number(tb.getAttribute('data-type')); }
+      else if (vb) { st.v = vb.getAttribute('data-view'); }
+      else return;
+      if (st.v.charAt(0) === 'e' && Number(st.v.slice(1)) >= DATA[st.t].essays.length) st.v = 'e0';
+      try { localStorage.setItem('catatan-ielts-t2', JSON.stringify(st)); } catch (er) {}
+      render();
+    });
+    render();
+  })();
 })();
 </script>
 
