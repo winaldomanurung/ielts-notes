@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Catatan IELTS</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  /* Layout: sticky tab bar over one reading column; templates are paper cards with fill-in slots, quizzes mimic an answer sheet. */
+  --bg: #EDF0F4;
+  --surface: #FFFFFF;
+  --surface-2: #F5F7FA;
+  --ink: #121B26;
+  --ink-2: #4B5A6B;
+  --line: #D2D9E1;
+  --accent: #2B3CC9;
+  --accent-ink: #FFFFFF;
+  --mark: #FFE66B;
+  --tint-a: rgba(43, 60, 201, .11);
+  --tint-b: rgba(255, 214, 64, .45);
+  --tint-c: rgba(22, 116, 63, .14);
+  --ok: #16743F;
+  --ok-bg: rgba(22, 116, 63, .10);
+  --bad: #B3261E;
+  --bad-bg: rgba(179, 38, 30, .09);
+  --f-display: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --f-body: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E141C; --surface: #151D28; --surface-2: #1A2431; --ink: #E7EDF3; --ink-2: #9DAEC0; --line: #2A3746;
+    --accent: #9DAEFF; --accent-ink: #0E141C; --mark: rgba(255, 214, 64, .34);
+    --tint-a: rgba(157, 174, 255, .16); --tint-b: rgba(255, 214, 64, .22); --tint-c: rgba(95, 212, 151, .15);
+    --ok: #5FD497; --ok-bg: rgba(95, 212, 151, .12); --bad: #FF8F86; --bad-bg: rgba(255, 143, 134, .12);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E141C; --surface: #151D28; --surface-2: #1A2431; --ink: #E7EDF3; --ink-2: #9DAEC0; --line: #2A3746;
+  --accent: #9DAEFF; --accent-ink: #0E141C; --mark: rgba(255, 214, 64, .34);
+  --tint-a: rgba(157, 174, 255, .16); --tint-b: rgba(255, 214, 64, .22); --tint-c: rgba(95, 212, 151, .15);
+  --ok: #5FD497; --ok-bg: rgba(95, 212, 151, .12); --bad: #FF8F86; --bad-bg: rgba(255, 143, 134, .12);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 400 16px/1.65 var(--f-body);
+  padding-block: 0 56px;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 40; background: var(--bg);
+}
+.wrap {
+  max-width: 980px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3, h4 { font-family: var(--f-display); line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Hero */
+.hero { padding-block: 44px 28px; }
+.eyebrow { font: 500 .75rem/1 var(--f-mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 16px; }
+h1 { font-size: clamp(2.6rem, 8vw, 4.4rem); font-weight: 700; letter-spacing: -.03em; }
+h1 .hl { padding: 0 .08em; }
+.lede { max-width: 56ch; margin-top: 16px; color: var(--ink-2); font-size: 1.08rem; }
+
+/* Tabs */
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); border-bottom: 1px solid var(--line); }
+.tabs-scroll { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.tabs-scroll::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none; background: none; border: 0; border-bottom: 3px solid transparent; cursor: pointer;
+  font: 600 .95rem/1 var(--f-display); color: var(--ink-2); padding: 16px 14px 13px;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* Panels */
+.panel { padding-block: 32px 8px; }
+.panel .wrap > * + * { margin-top: 18px; }
+.panel .wrap > h2 { margin-top: 40px; }
+.panel .wrap > h2:first-child { margin-top: 0; }
+h2 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+.sub { color: var(--ink-2); max-width: 64ch; }
+.label { font: 500 .72rem/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.hl { background: linear-gradient(transparent 58%, var(--mark) 58%); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; min-width: 0; }
+.card > * + * { margin-top: 10px; }
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); }
+.grid > * { min-width: 0; }
+.grid.wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); }
+
+.btn {
+  font: 600 .9rem/1 var(--f-display); cursor: pointer; border-radius: 5px; padding: 11px 16px;
+  background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent);
+}
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn:hover { filter: brightness(1.08); }
+.btn.link { background: none; border: 0; padding: 0; color: var(--accent); }
+
+/* Day bar */
+.daybar { display: flex; gap: 3px; height: 30px; }
+.seg { display: block; border-radius: 2px; }
+.s1 { background: var(--accent); }
+.s2 { background: color-mix(in srgb, var(--accent) 66%, var(--surface)); }
+.s3 { background: color-mix(in srgb, var(--accent) 38%, var(--surface)); }
+.s4 { background: var(--mark); }
+.legend { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 10px 18px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.legend li { display: flex; gap: 10px; align-items: baseline; min-width: 0; }
+.legend i { flex: none; width: 10px; height: 10px; border-radius: 2px; transform: translateY(1px); }
+.legend b { font: 600 1rem var(--f-display); display: block; }
+.legend span { font: 400 .82rem/1.4 var(--f-mono); color: var(--ink-2); }
+
+.skill h3 { font-size: 1.4rem; }
+.meta { font: 500 .78rem/1.3 var(--f-mono); color: var(--ink-2); }
+
+/* Frames */
+.frame { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.fr { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 18px; padding: 16px 18px; }
+.fr + .fr { border-top: 1px solid var(--line); }
+.fl { font: 600 .8rem/1.6 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.fd > p + p { margin-top: 6px; }
+.fbar { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.fbar b { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; display: block; }
+.fbar b i { display: block; height: 100%; background: var(--accent); }
+.fbar span { font: 500 .75rem var(--f-mono); color: var(--ink-2); white-space: nowrap; }
+@media (max-width: 560px) { .fr { grid-template-columns: minmax(0, 1fr); } }
+
+/* Templates */
+.tpl { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px 16px; font-size: 1.02rem; }
+.tpl::before { content: attr(data-label); display: block; font: 500 .7rem/1 var(--f-mono); letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px; }
+.tpl + .tpl { margin-top: 10px; }
+.slot { border-bottom: 1.5px dashed var(--accent); color: var(--accent); font-weight: 500; padding: 0 2px; }
+.stack > * + * { margin-top: 10px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px; padding: 4px 10px; font-size: .92rem; }
+.group-title { font: 600 .95rem var(--f-display); margin: 14px 0 8px; }
+.group-title:first-child { margin-top: 0; }
+
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .95rem; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 .72rem/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); background: var(--surface-2); }
+.tcard { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+
+ul.tips { margin: 0; padding-left: 1.15em; }
+ul.tips li + li { margin-top: 6px; }
+ul.tips li::marker { color: var(--accent); }
+
+.s-a { background: var(--tint-a); }
+.s-r { background: var(--tint-b); }
+.s-e { background: var(--tint-c); }
+.key { display: flex; flex-wrap: wrap; gap: 10px 16px; font: 500 .78rem var(--f-mono); color: var(--ink-2); }
+.key span { padding: 1px 6px; color: var(--ink); }
+
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; }
+summary { cursor: pointer; padding: 12px 16px; font: 600 .95rem var(--f-display); }
+details[open] summary { border-bottom: 1px solid var(--line); }
+details > .in { padding: 14px 16px 16px; }
+details > .in > * + * { margin-top: 10px; }
+
+/* Timer */
+.timer { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.clock { font: 500 3rem/1 var(--f-mono); letter-spacing: -.02em; min-width: 4.2ch; font-variant-numeric: tabular-nums; }
+.clock.done { color: var(--bad); }
+.tbtns { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Cue card / passage */
+.paper { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 20px 22px; }
+.paper > * + * { margin-top: 12px; }
+.paper.passage p { font-size: 1.04rem; line-height: 1.8; }
+.pl { font: 600 .8rem var(--f-mono); color: var(--accent); margin-right: 8px; }
+.split { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) { .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+/* Quiz */
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 6px 20px 18px; }
+.qh { padding-top: 16px; }
+.qh + .q { margin-top: 6px; }
+.qh h4 { font-size: 1rem; }
+.qh p { color: var(--ink-2); font-size: .92rem; margin-top: 4px; }
+.hlist { list-style: none; margin: 10px 0 0; padding: 0; font-size: .95rem; }
+.hlist li { display: flex; gap: 10px; padding: 3px 0; }
+.hlist b { font: 600 .85rem var(--f-mono); color: var(--accent); min-width: 2.4ch; }
+.q { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 4px 6px; padding: 14px 10px; border-bottom: 1px dashed var(--line); margin-inline: -10px; border-radius: 4px; }
+.q.ok { background: var(--ok-bg); }
+.q.no { background: var(--bad-bg); }
+.qn { font: 600 .95rem var(--f-mono); color: var(--accent); padding-top: 1px; }
+.qt { font-weight: 500; }
+.blank { display: inline-block; min-width: 5.5em; border-bottom: 1.5px solid var(--ink-2); margin-inline: 3px; transform: translateY(-2px); }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.opt { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 7px 12px; cursor: pointer; font-size: .93rem; }
+.opt input { accent-color: var(--accent); margin: 0; }
+.opt:has(input:checked) { border-color: var(--accent); background: var(--tint-a); }
+.txt { margin-top: 8px; width: min(100%, 280px); font: 400 1rem var(--f-body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-bottom: 2px solid var(--ink-2); border-radius: 3px; padding: 8px 10px; }
+.res { margin-top: 10px; font-size: .92rem; color: var(--ink-2); }
+.res b { color: var(--ink); }
+.q.ok .res b:first-child { color: var(--ok); }
+.q.no .res b:first-child { color: var(--bad); }
+.ans { font: 500 .88rem var(--f-mono); background: var(--surface-2); padding: 1px 6px; border-radius: 3px; color: var(--ink); }
+.qbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 16px; }
+.score { font: 500 .9rem var(--f-mono); color: var(--ink-2); }
+
+.transcript { font-size: .98rem; }
+.transcript p { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 8px; }
+.transcript p + p { margin-top: 6px; }
+.transcript b { font: 600 .78rem/1.9 var(--f-mono); color: var(--accent); }
+
+.src { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; align-items: start; }
+.src .badge { font: 500 .68rem/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--line); padding: 4px 7px; border-radius: 3px; color: var(--ink-2); white-space: nowrap; }
+.src h3 { font-size: 1.12rem; }
+.src p { grid-column: 1 / -1; color: var(--ink-2); font-size: .95rem; }
+.src a { grid-column: 1 / -1; font: 500 .85rem var(--f-mono); overflow-wrap: anywhere; }
+
+.foot { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: .88rem; max-width: 70ch; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Catatan pribadi · Academic &amp; General Training</p>
+    <h1>Catatan <span class="hl">IELTS</span></h1>
+    <p class="lede">Kerangka, template, dan contoh latihan yang ditulis ulang dari strategi sumber-sumber rujukan. Dibuka sebelum latihan atau sehari sebelum tes.</p>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Bagian catatan">
+  <div class="wrap">
+    <div class="tabs-scroll" role="tablist">
+      <button class="tab" role="tab" id="btn-ringkasan" aria-controls="tab-ringkasan" data-tab="ringkasan">Ringkasan</button>
+      <button class="tab" role="tab" id="btn-writing" aria-controls="tab-writing" data-tab="writing">Writing</button>
+      <button class="tab" role="tab" id="btn-speaking" aria-controls="tab-speaking" data-tab="speaking">Speaking</button>
+      <button class="tab" role="tab" id="btn-reading" aria-controls="tab-reading" data-tab="reading">Reading</button>
+      <button class="tab" role="tab" id="btn-listening" aria-controls="tab-listening" data-tab="listening">Listening</button>
+      <button class="tab" role="tab" id="btn-sumber" aria-controls="tab-sumber" data-tab="sumber">Sumber</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ RINGKASAN ============ -->
+<section class="panel" id="tab-ringkasan" role="tabpanel" aria-labelledby="btn-ringkasan">
+  <div class="wrap">
+    <h2>Satu hari tes</h2>
+    <p class="sub">Listening, Reading, dan Writing berurutan dalam satu sesi. Speaking dijadwalkan terpisah. Lebar blok di bawah mengikuti lama waktunya.</p>
+
+    <div class="card">
+      <div class="daybar" role="img" aria-label="Listening 30 menit, Reading 60 menit, Writing 60 menit, Speaking 11 sampai 14 menit">
+        <span class="seg s1" style="flex:30"></span>
+        <span class="seg s2" style="flex:60"></span>
+        <span class="seg s3" style="flex:60"></span>
+        <span class="seg s4" style="flex:14"></span>
+      </div>
+      <ul class="legend">
+        <li><i class="s1"></i><div><b>Listening</b><span>30 mnt · 40 soal</span></div></li>
+        <li><i class="s2"></i><div><b>Reading</b><span>60 mnt · 40 soal</span></div></li>
+        <li><i class="s3"></i><div><b>Writing</b><span>60 mnt · 2 tugas</span></div></li>
+        <li><i class="s4"></i><div><b>Speaking</b><span>11–14 mnt · 3 bagian</span></div></li>
+      </ul>
+    </div>
+
+    <div class="grid">
+      <div class="card skill">
+        <p class="label">Skill 1</p>
+        <h3>Writing</h3>
+        <p>Task 1 (≥150 kata, ±20 mnt) dan Task 2 (≥250 kata, ±40 mnt). Task 2 bobotnya dua kali Task 1.</p>
+        <button class="btn link" data-go="writing">Buka catatan Writing →</button>
+      </div>
+      <div class="card skill">
+        <p class="label">Skill 2</p>
+        <h3>Speaking</h3>
+        <p>Part 1 perkenalan, Part 2 kartu topik (1 mnt siap, 1–2 mnt bicara), Part 3 diskusi abstrak.</p>
+        <button class="btn link" data-go="speaking">Buka catatan Speaking →</button>
+      </div>
+      <div class="card skill">
+        <p class="label">Skill 3</p>
+        <h3>Reading</h3>
+        <p>3 teks, 40 soal, 60 menit tanpa waktu tambahan untuk memindahkan jawaban.</p>
+        <button class="btn link" data-go="reading">Buka catatan Reading →</button>
+      </div>
+      <div class="card skill">
+        <p class="label">Skill 4</p>
+        <h3>Listening</h3>
+        <p>4 bagian, audio diputar sekali. Versi kertas memberi 10 menit untuk menyalin jawaban.</p>
+        <button class="btn link" data-go="listening">Buka catatan Listening →</button>
+      </div>
+    </div>
+
+    <h2>Cara skor dihitung</h2>
+    <div class="grid wide">
+      <div class="card">
+        <h3>Band 0–9, kelipatan 0.5</h3>
+        <p>Listening dan Reading dinilai dari jumlah jawaban benar (1 benar = 1 poin), lalu dikonversi ke band. Writing dan Speaking dinilai berdasarkan empat kriteria yang bobotnya sama, masing-masing 25%.</p>
+        <p>Skor keseluruhan adalah rata-rata empat skill. Rata-rata yang berakhir <span class="hl">.25</span> dibulatkan naik ke .5, dan yang berakhir <span class="hl">.75</span> dibulatkan naik ke bilangan bulat berikutnya.</p>
+      </div>
+      <div class="card">
+        <h3>Contoh pembulatan</h3>
+        <div class="scroll">
+          <table style="min-width:0">
+            <thead><tr><th>L · R · W · S</th><th>Rata-rata</th><th>Overall</th></tr></thead>
+            <tbody>
+              <tr><td>7.0 · 6.5 · 6.0 · 6.5</td><td>6.50</td><td><b>6.5</b></td></tr>
+              <tr><td>7.0 · 6.5 · 6.0 · 6.0</td><td>6.375</td><td><b>6.5</b></td></tr>
+              <tr><td>7.0 · 7.0 · 6.5 · 6.5</td><td>6.75</td><td><b>7.0</b></td></tr>
+              <tr><td>6.5 · 6.0 · 6.0 · 6.0</td><td>6.125</td><td><b>6.0</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h2>Academic atau General Training</h2>
+    <p class="sub">Listening dan Speaking sama untuk keduanya. Yang berbeda adalah Reading dan Writing.</p>
+    <div class="grid wide">
+      <div class="card">
+        <h3>Academic</h3>
+        <ul class="tips">
+          <li>Reading: tiga teks akademik, gaya jurnal atau majalah ilmiah.</li>
+          <li>Writing Task 1: mendeskripsikan grafik, tabel, peta, atau proses.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>General Training</h3>
+        <ul class="tips">
+          <li>Reading: teks sehari-hari, pekerjaan, dan bacaan umum.</li>
+          <li>Writing Task 1: surat (formal, semi-formal, atau informal).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Lima aturan yang sering menyelamatkan skor</h2>
+    <div class="grid">
+      <div class="card"><h3>Ejaan dihitung</h3><p>Di Listening dan Reading, jawaban salah eja atau salah bentuk jamak dianggap salah.</p></div>
+      <div class="card"><h3>Patuhi batas kata</h3><p>“No more than two words” berarti tiga kata sudah salah, walau isinya benar.</p></div>
+      <div class="card"><h3>Jangan kosongkan jawaban</h3><p>Tidak ada pengurangan untuk jawaban salah. Tebak jika waktu habis.</p></div>
+      <div class="card"><h3>Kata minimum Writing</h3><p>Di bawah 150 atau 250 kata dikenai penalti pada kriteria pertama.</p></div>
+      <div class="card"><h3>Jangan menghafal di Speaking</h3><p>Jawaban hafalan terdengar datar dan bisa dikenali penguji. Hafalkan kerangka, bukan kalimat utuh.</p></div>
+    </div>
+
+    <p class="foot">Format di atas adalah yang umum berlaku. Sebelum mendaftar, cek ielts.org atau penyelenggara tes untuk detail terbaru.</p>
+  </div>
+</section>
+
+<!-- ============ WRITING ============ -->
+<section class="panel" id="tab-writing" role="tabpanel" aria-labelledby="btn-writing" hidden>
+  <div class="wrap">
+    <h2>Task 1 · Academic</h2>
+    <p class="sub">Tugasnya melaporkan, bukan beropini. Lebar bar menunjukkan perkiraan porsi kata dari total ±170.</p>
+
+    <div class="frame">
+      <div class="fr"><div class="fl">Intro</div><div class="fd">
+        <p>Parafrase soal dalam satu kalimat: apa yang ditampilkan, di mana, kapan.</p>
+        <div class="fbar"><b><i style="width:15%"></i></b><span>≈25 kata</span></div></div></div>
+      <div class="fr"><div class="fl">Overview</div><div class="fd">
+        <p>Dua gambaran terbesar tanpa angka rinci: tren utama, perbedaan terbesar, atau tahapan awal dan akhir. <span class="hl">Jangan dilewatkan.</span></p>
+        <div class="fbar"><b><i style="width:20%"></i></b><span>≈35 kata</span></div></div></div>
+      <div class="fr"><div class="fl">Detail 1</div><div class="fd">
+        <p>Kelompokkan data yang mirip, lalu sebut angka pembanding.</p>
+        <div class="fbar"><b><i style="width:32%"></i></b><span>≈55 kata</span></div></div></div>
+      <div class="fr"><div class="fl">Detail 2</div><div class="fd">
+        <p>Kelompok data kedua, dengan angka dan perbandingan.</p>
+        <div class="fbar"><b><i style="width:33%"></i></b><span>≈55 kata</span></div></div></div>
+    </div>
+
+    <div class="tpl" data-label="Intro">The {{line graph}} illustrates how {{subject}} changed in {{place}} between {{year}} and {{year}}.</div>
+    <div class="tpl" data-label="Overview">Overall, {{main trend A}}, whereas {{main trend B}}. {{Item X}} remained the most {{popular / expensive / common}} throughout the period.</div>
+    <div class="tpl" data-label="Detail">In {{year}}, {{item}} stood at {{figure}}, before climbing sharply to {{figure}} by {{year}}. By contrast, {{item}} fell gradually from {{figure}} to {{figure}}.</div>
+
+    <h3>Pilih gaya sesuai jenis data</h3>
+    <div class="scroll tcard">
+      <table>
+        <thead><tr><th>Jenis</th><th>Fokus</th><th>Bahasa utama</th></tr></thead>
+        <tbody>
+          <tr><td>Line graph</td><td>Perubahan dari waktu ke waktu</td><td>rise, fall, peak, fluctuate, level off</td></tr>
+          <tr><td>Bar chart / table</td><td>Perbandingan antar kategori</td><td>the highest, whereas, compared with</td></tr>
+          <tr><td>Pie chart</td><td>Proporsi dari keseluruhan</td><td>account for, make up, a quarter of</td></tr>
+          <tr><td>Process</td><td>Urutan tahapan</td><td>passive voice, first, then, finally</td></tr>
+          <tr><td>Map</td><td>Perubahan lokasi sebelum dan sesudah</td><td>to the north of, was replaced by, remained</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid wide">
+      <div class="card">
+        <p class="group-title">Naik dan turun</p>
+        <div class="chips"><span class="chip">rose / climbed / grew</span><span class="chip">fell / declined / dipped</span><span class="chip">remained stable</span><span class="chip">levelled off</span><span class="chip">peaked at</span><span class="chip">bottomed out at</span><span class="chip">fluctuated around</span></div>
+        <p class="group-title">Besar kecilnya perubahan</p>
+        <div class="chips"><span class="chip">slight</span><span class="chip">moderate</span><span class="chip">sharp</span><span class="chip">dramatic</span><span class="chip">steady</span><span class="chip">gradual</span></div>
+      </div>
+      <div class="card">
+        <p class="group-title">Mendekati angka</p>
+        <div class="chips"><span class="chip">approximately</span><span class="chip">roughly</span><span class="chip">just under</span><span class="chip">just over</span><span class="chip">nearly</span></div>
+        <p class="group-title">Perbandingan dan proporsi</p>
+        <div class="chips"><span class="chip">whereas</span><span class="chip">in contrast</span><span class="chip">compared with</span><span class="chip">twice as high as</span><span class="chip">account for</span><span class="chip">make up</span></div>
+      </div>
+    </div>
+
+    <h2>Task 1 · General Training (surat)</h2>
+    <div class="frame">
+      <div class="fr"><div class="fl">Salam</div><div class="fd"><p>Sesuaikan dengan penerima, lalu pasangkan dengan penutup yang benar.</p></div></div>
+      <div class="fr"><div class="fl">Tujuan</div><div class="fd"><p>Satu atau dua kalimat: kenapa menulis surat ini.</p></div></div>
+      <div class="fr"><div class="fl">Tiga poin</div><div class="fd"><p>Soal selalu memberi tiga poin. Satu paragraf pendek untuk tiap poin, lengkap dengan detail.</p></div></div>
+      <div class="fr"><div class="fl">Penutup</div><div class="fd"><p>Tindakan yang diharapkan dari penerima, lalu salam penutup.</p></div></div>
+    </div>
+    <div class="scroll tcard">
+      <table>
+        <thead><tr><th>Gaya</th><th>Salam</th><th>Penutup</th></tr></thead>
+        <tbody>
+          <tr><td>Formal</td><td>Dear Sir or Madam,</td><td>Yours faithfully,</td></tr>
+          <tr><td>Semi-formal</td><td>Dear Mr / Ms {{surname}},</td><td>Yours sincerely,</td></tr>
+          <tr><td>Informal</td><td>Dear {{first name}},</td><td>Best wishes, / Take care,</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tpl" data-label="Pembuka">I am writing to {{complain about / enquire about / apologise for}} {{topic}}.</div>
+
+    <h2>Task 2 · Essay</h2>
+    <p class="sub">Bobot dua kali Task 1. Sisihkan 5 menit merencanakan, 30 menit menulis, 5 menit memeriksa.</p>
+
+    <div class="frame">
+      <div class="fr"><div class="fl">Intro</div><div class="fd">
+        <p>Parafrase isu, lalu tulis posisi atau gambaran isi esai.</p>
+        <div class="fbar"><b><i style="width:14%"></i></b><span>≈40 kata</span></div></div></div>
+      <div class="fr"><div class="fl">Body 1</div><div class="fd">
+        <p>Satu ide utama. Pola: Point → Explain → Example → Link.</p>
+        <div class="fbar"><b><i style="width:36%"></i></b><span>≈100 kata</span></div></div></div>
+      <div class="fr"><div class="fl">Body 2</div><div class="fd">
+        <p>Ide kedua, atau sisi lawan untuk soal discussion.</p>
+        <div class="fbar"><b><i style="width:36%"></i></b><span>≈100 kata</span></div></div></div>
+      <div class="fr"><div class="fl">Penutup</div><div class="fd">
+        <p>Tegaskan posisi dan rangkum alasan. Tanpa ide baru.</p>
+        <div class="fbar"><b><i style="width:14%"></i></b><span>≈40 kata</span></div></div></div>
+    </div>
+
+    <div class="scroll tcard">
+      <table>
+        <thead><tr><th>Tipe soal</th><th>Kata kunci di soal</th><th>Isi body</th></tr></thead>
+        <tbody>
+          <tr><td>Opinion</td><td>To what extent do you agree?</td><td>Posisi konsisten dari intro sampai penutup; dua alasan terkuat.</td></tr>
+          <tr><td>Discussion</td><td>Discuss both views</td><td>Body 1 untuk pandangan A, body 2 untuk B, opini sendiri di intro dan penutup.</td></tr>
+          <tr><td>Problem–solution</td><td>What problems? What solutions?</td><td>Body 1 masalah dan penyebab, body 2 solusi yang menjawab masalah itu.</td></tr>
+          <tr><td>Advantages–disadvantages</td><td>Do the advantages outweigh…?</td><td>Satu body per sisi; sebut mana yang lebih berat bila diminta.</td></tr>
+          <tr><td>Two-part question</td><td>Dua pertanyaan terpisah</td><td>Satu body per pertanyaan, jawab langsung.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tpl" data-label="Intro (opinion)">In recent years, there has been growing debate over whether {{topic}}. While some people argue that {{view A}}, I believe that {{your position}}.</div>
+    <div class="tpl" data-label="Body">One major reason why {{claim}} is that {{reason}}. For instance, {{specific example}}. As a result, {{consequence}}.</div>
+    <div class="tpl" data-label="Concession">Admittedly, {{opposing point}}. However, {{why it does not change your position}}.</div>
+    <div class="tpl" data-label="Penutup">In conclusion, although {{counterpoint}}, I firmly believe that {{position}}, mainly because {{summary of reasons}}.</div>
+
+    <h3>Penghubung yang wajar dipakai</h3>
+    <div class="grid wide">
+      <div class="card">
+        <div class="chips"><span class="chip">In addition</span><span class="chip">Furthermore</span><span class="chip">For instance</span><span class="chip">A case in point is</span><span class="chip">As a result</span><span class="chip">Consequently</span></div>
+      </div>
+      <div class="card">
+        <div class="chips"><span class="chip">However</span><span class="chip">In contrast</span><span class="chip">Nevertheless</span><span class="chip">Although</span><span class="chip">Admittedly</span><span class="chip">To sum up</span></div>
+      </div>
+    </div>
+    <p class="sub">Tidak perlu penghubung di awal setiap kalimat. Penghubung berlebihan malah menurunkan Coherence and Cohesion.</p>
+
+    <h2>Empat kriteria</h2>
+    <div class="grid">
+      <div class="card"><p class="label">25%</p><h3>Task Achievement / Response</h3><p>Semua bagian soal terjawab. Task 1 punya overview; Task 2 punya posisi yang jelas dan contoh yang spesifik.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Coherence &amp; Cohesion</h3><p>Satu ide utama per paragraf. Pakai this, these, such agar tidak mengulang kata benda.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Lexical Resource</h3><p>Sinonim yang akurat dan kolokasi yang tepat (make a decision, bukan do a decision). Periksa ejaan.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Grammatical Range &amp; Accuracy</h3><p>Campur kalimat sederhana dan kompleks. Kontrol tense, artikel, dan kesesuaian subjek-kata kerja.</p></div>
+    </div>
+
+    <h2>Cek lima menit terakhir</h2>
+    <div class="card">
+      <ul class="tips">
+        <li>Semua bagian soal sudah dijawab?</li>
+        <li>Jumlah kata melewati batas minimum?</li>
+        <li>Tidak ada singkatan seperti don’t atau it’s?</li>
+        <li>Setiap paragraf punya satu ide dan satu contoh atau data?</li>
+        <li>Subjek-kata kerja, artikel (a / the), dan tense sudah dibaca ulang?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPEAKING ============ -->
+<section class="panel" id="tab-speaking" role="tabpanel" aria-labelledby="btn-speaking" hidden>
+  <div class="wrap">
+    <h2>Part 1 · Perkenalan</h2>
+    <p class="sub">4–5 menit, topik akrab: pekerjaan atau studi, rumah, hobi, makanan, rutinitas. Jawab dalam dua sampai tiga kalimat.</p>
+
+    <div class="tpl" data-label="Pola A · R · E">{{Jawaban langsung}}. {{Alasan, mulai dengan because / mainly since}}. {{Contoh atau detail kecil}}.</div>
+    <div class="card">
+      <p class="label">Contoh · “Do you enjoy cooking?”</p>
+      <p><span class="s-a">Yes, I do,</span> <span class="s-r">mostly because it helps me relax after a long day.</span> <span class="s-e">I usually make simple dishes like fried rice or soup, but at weekends I like trying new recipes from videos online.</span></p>
+      <div class="key"><span class="s-a">Answer</span><span class="s-r">Reason</span><span class="s-e">Example</span></div>
+    </div>
+
+    <h2>Part 2 · Kartu topik</h2>
+    <p class="sub">Satu menit menyiapkan catatan, lalu bicara satu sampai dua menit tanpa terputus. Tulis kata kunci saja, bukan kalimat.</p>
+
+    <div class="card">
+      <p class="label">Pengatur waktu latihan</p>
+      <div class="timer">
+        <div class="clock" id="timer" role="timer" aria-live="off">1:00</div>
+        <div>
+          <p id="timer-label" class="meta">Siap dimulai</p>
+          <div class="tbtns" style="margin-top:10px">
+            <button class="btn" type="button" data-sec="60" data-label="Persiapan">Persiapan 1:00</button>
+            <button class="btn" type="button" data-sec="120" data-label="Bicara">Bicara 2:00</button>
+            <button class="btn ghost" type="button" data-sec="0" data-label="Siap dimulai">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper">
+      <p class="label">Cue card · contoh</p>
+      <h3>Describe a skill you learned that you find useful.</h3>
+      <ul class="tips">
+        <li>what the skill is</li>
+        <li>when and how you learned it</li>
+        <li>why you decided to learn it</li>
+        <li>and explain why it is useful to you</li>
+      </ul>
+    </div>
+
+    <div class="grid">
+      <div class="card"><h3>Kerangka satu menit</h3>
+        <ul class="tips"><li>Buka dengan kalimat topik.</li><li>Satu kata kunci per poin di kartu.</li><li>Tambahkan satu detail atau perasaan per poin.</li><li>Tutup dengan satu kalimat rangkuman.</li></ul></div>
+      <div class="card"><h3>Kalau kehabisan ide</h3>
+        <ul class="tips"><li>Jawab: siapa, kapan, di mana, mengapa, bagaimana rasanya.</li><li>Bandingkan masa lalu dan sekarang.</li><li>Berhenti hanya saat penguji menghentikan.</li></ul></div>
+    </div>
+
+    <details>
+      <summary>Lihat contoh jawaban (±1,5 menit)</summary>
+      <div class="in">
+        <p>I’d like to talk about learning how to manage my time with a weekly planner. It sounds simple, but it has honestly changed how I work.</p>
+        <p>I picked it up about three years ago, when my schedule suddenly became much busier. At first I just copied advice from a few videos, then I adjusted it by trial and error until it suited me. Every Sunday evening I list my tasks, estimate how long each will take, and put them into a calendar.</p>
+        <p>The reason I decided to learn it was that I kept missing small deadlines, and that was making me feel stressed all the time.</p>
+        <p>These days, I think it’s useful for two main reasons. Firstly, I get my important work done earlier, so I’m not rushing at the last minute. Secondly, I actually have free time that I can enjoy without feeling guilty. All in all, it’s a small habit, but it gives me a lot more control over my week.</p>
+      </div>
+    </details>
+
+    <h2>Part 3 · Diskusi</h2>
+    <p class="sub">4–5 menit, topik meluas ke masyarakat. Jawaban lebih panjang dan beralasan, bukan cerita pribadi.</p>
+
+    <div class="tpl" data-label="Pola P · E · E · L">{{Point: pendapat}}. {{Explain: kenapa}}. {{Example: contoh umum}}. {{Link: sisi lain atau kesimpulan}}.</div>
+    <div class="card">
+      <p class="label">Contoh · “Why do some people find it hard to manage their time?”</p>
+      <p><span class="s-a">I’d say the biggest factor is digital distraction.</span> <span class="s-r">Notifications constantly pull our attention away, so tasks take much longer than planned.</span> <span class="s-e">For example, someone might open their phone to check one message and end up scrolling for half an hour.</span> <span class="s-r">That said, some people struggle simply because they take on too much, so it isn’t only about technology.</span></p>
+      <div class="key"><span class="s-a">Point</span><span class="s-r">Explain / Link</span><span class="s-e">Example</span></div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><p class="group-title">Mengulur waktu</p>
+        <div class="stack"><p>That’s an interesting question…</p><p>Let me think for a second…</p><p>Well, it really depends on…</p></div></div>
+      <div class="card"><p class="group-title">Menyampaikan opini</p>
+        <div class="stack"><p>I’d say that…</p><p>From my perspective…</p><p>As far as I’m concerned…</p></div></div>
+      <div class="card"><p class="group-title">Membandingkan</p>
+        <div class="stack"><p>Compared to the past…</p><p>Back then… whereas now…</p><p>It used to be… but these days…</p></div></div>
+      <div class="card"><p class="group-title">Menebak masa depan</p>
+        <div class="stack"><p>I suppose it might…</p><p>It’s likely that…</p><p>I wouldn’t be surprised if…</p></div></div>
+      <div class="card"><p class="group-title">Lupa satu kata</p>
+        <div class="stack"><p>What I mean is…</p><p>It’s a kind of…</p><p>Sorry, I mean…</p></div></div>
+    </div>
+
+    <h2>Empat kriteria</h2>
+    <div class="grid">
+      <div class="card"><p class="label">25%</p><h3>Fluency &amp; Coherence</h3><p>Bicara mengalir dan jawaban berkembang. Jeda sesekali untuk berpikir wajar; mengulang-ulang kata yang sama tidak.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Lexical Resource</h3><p>Variasi kosakata dan kemampuan memparafrase. Satu idiom yang pas lebih baik daripada lima yang dipaksakan.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Grammatical Range &amp; Accuracy</h3><p>Pakai tense yang berbeda dan kalimat kompleks, dengan kesalahan yang tidak mengganggu makna.</p></div>
+      <div class="card"><p class="label">25%</p><h3>Pronunciation</h3><p>Yang dinilai kejelasan, tekanan kata, dan intonasi. Aksen tertentu tidak dituntut.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ READING ============ -->
+<section class="panel" id="tab-reading" role="tabpanel" aria-labelledby="btn-reading" hidden>
+  <div class="wrap">
+    <h2>Strategi umum</h2>
+    <div class="grid">
+      <div class="card"><h3>Atur waktu</h3><p>±20 menit per teks. Teks ketiga biasanya paling sulit, jadi jangan habiskan waktu di dua teks pertama.</p></div>
+      <div class="card"><h3>Baca sekilas dulu</h3><p>Judul dan kalimat pertama tiap paragraf, maksimal dua menit. Detail dicari setelah membaca soal.</p></div>
+      <div class="card"><h3>Cari kata kunci, bukan makna sama persis</h3><p>Soal hampir selalu memparafrase teks. Cari angka, nama, dan kata yang sulit diganti.</p></div>
+      <div class="card"><h3>Jawaban berurutan</h3><p>Kecuali matching headings dan matching information, jawaban muncul sesuai urutan teks.</p></div>
+    </div>
+
+    <h3>Tipe soal dan pegangan cepat</h3>
+    <div class="scroll tcard">
+      <table>
+        <thead><tr><th>Tipe</th><th>Pegangan</th></tr></thead>
+        <tbody>
+          <tr><td>True / False / Not Given</td><td>True: maknanya sama. False: bertentangan. Not Given: teks tidak menyebutkan. Pengetahuan sendiri tidak dipakai.</td></tr>
+          <tr><td>Yes / No / Not Given</td><td>Sama, tetapi menilai pendapat penulis, bukan fakta.</td></tr>
+          <tr><td>Matching headings</td><td>Baca judul dulu, cari ide utama paragraf. Satu judul biasanya pengecoh.</td></tr>
+          <tr><td>Sentence / summary completion</td><td>Ambil kata persis dari teks. Cek batas kata dan tata bahasa kalimat.</td></tr>
+          <tr><td>Multiple choice</td><td>Coret pilihan yang jelas salah dulu. Waspadai pilihan yang benar sebagian.</td></tr>
+          <tr><td>Short answer</td><td>Jawab dengan kata dari teks, singkat, dan cocok dengan kata tanya.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Latihan mini</h2>
+    <p class="sub">Teks dan soal di bawah ditulis sendiri untuk melatih format, bukan salinan soal resmi. Untuk latihan waktu penuh, pakai tes resmi atau buku Cambridge IELTS.</p>
+
+    <div class="split">
+      <div class="paper passage">
+        <p class="label">Reading Passage · Rooftop Farming in Dense Cities</p>
+        <p><span class="pl">A</span>As city populations grow, space for traditional agriculture has all but disappeared. In response, a number of urban planners have begun to look upward. Rooftop farms, which grow vegetables on the flat tops of office blocks and apartment buildings, first appeared in small numbers in the 1990s, but their number has risen sharply over the past decade.</p>
+        <p><span class="pl">B</span>Supporters point to several benefits. Food grown on a roof travels only a few metres to reach customers, which cuts the fuel used in transport. A layer of soil and plants also acts as insulation, keeping the building cooler in summer and reducing the need for air conditioning. Moreover, rainwater that would otherwise run into drains is absorbed by the plants.</p>
+        <p><span class="pl">C</span>Critics, however, note that rooftop farming is not suited to every building. Older structures often cannot bear the weight of wet soil, and installing a farm can cost far more than planting on ordinary farmland. A 2019 survey of one city found that fewer than a third of the farms studied made a profit, although many were run by community groups whose main aim was education rather than income.</p>
+      </div>
+      <div id="rq" class="quiz"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LISTENING ============ -->
+<section class="panel" id="tab-listening" role="tabpanel" aria-labelledby="btn-listening" hidden>
+  <div class="wrap">
+    <h2>Empat bagian, makin sulit</h2>
+    <div class="scroll tcard">
+      <table>
+        <thead><tr><th>Bagian</th><th>Isi</th><th>Soal yang sering muncul</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Percakapan dua orang, konteks sehari-hari (misalnya reservasi)</td><td>Form, note, atau table completion</td></tr>
+          <tr><td>2</td><td>Monolog sehari-hari (pengumuman, tur)</td><td>Multiple choice, peta atau denah</td></tr>
+          <tr><td>3</td><td>Diskusi hingga empat pembicara, konteks pendidikan</td><td>Multiple choice, matching</td></tr>
+          <tr><td>4</td><td>Kuliah akademik, satu pembicara</td><td>Sentence atau summary completion</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid">
+      <div class="card"><h3>Pakai waktu preview</h3><p>Garis bawahi kata kunci dan tebak jenis jawabannya: angka, nama, tempat, atau waktu.</p></div>
+      <div class="card"><h3>Waspadai koreksi diri</h3><p>“Actually”, “sorry, I mean”, “no wait”: jawaban yang dipakai biasanya yang terakhir.</p></div>
+      <div class="card"><h3>Jawaban berurutan</h3><p>Urutan soal mengikuti urutan audio. Kalau terlewat satu, lepaskan dan lanjut ke soal berikutnya.</p></div>
+      <div class="card"><h3>Ejaan dan bentuk</h3><p>Perhatikan jamak, batas kata, dan format angka. Nama yang dieja biasanya harus tepat per huruf.</p></div>
+    </div>
+
+    <h2>Latihan mini · Bagian 1</h2>
+    <p class="sub">Dialog di bawah ditulis sendiri. Suaranya dari pembaca teks di browser, jadi aksennya tidak sama dengan tes asli. Di tes asli audio hanya diputar sekali.</p>
+
+    <div class="card">
+      <p class="label">Audio</p>
+      <div class="tbtns">
+        <button class="btn" type="button" id="play">Putar audio</button>
+        <button class="btn ghost" type="button" id="stop">Berhenti</button>
+        <button class="btn ghost" type="button" id="toggle-tr" aria-expanded="false" aria-controls="tr">Tampilkan transkrip</button>
+      </div>
+      <p class="meta" id="audio-note" hidden></p>
+      <div id="tr" class="transcript" hidden></div>
+    </div>
+
+    <div id="lq" class="quiz"></div>
+  </div>
+</section>
+
+<!-- ============ SUMBER ============ -->
+<section class="panel" id="tab-sumber" role="tabpanel" aria-labelledby="btn-sumber" hidden>
+  <div class="wrap">
+    <h2>Rujukan</h2>
+    <p class="sub">Catatan di halaman ini adalah ringkasan dengan kata-kata sendiri. Untuk tulisan lengkap dan latihan resmi, buka sumber aslinya. Tautan mengarah ke beranda, jadi cari topiknya di situs masing-masing.</p>
+
+    <div class="grid wide">
+      <div class="card src">
+        <h3>IELTS.org</h3><span class="badge">Resmi</span>
+        <p>Format tes, deskripsi band, contoh soal, dan informasi pendaftaran terbaru.</p>
+        <a href="https://ielts.org" target="_blank" rel="noopener noreferrer">ielts.org</a>
+      </div>
+      <div class="card src">
+        <h3>British Council IELTS</h3><span class="badge">Resmi</span>
+        <p>Informasi tes dan materi persiapan gratis dari salah satu penyelenggara resmi.</p>
+        <a href="https://takeielts.britishcouncil.org" target="_blank" rel="noopener noreferrer">takeielts.britishcouncil.org</a>
+      </div>
+      <div class="card src">
+        <h3>IDP IELTS</h3><span class="badge">Resmi</span>
+        <p>Penyelenggara resmi lain. Berguna untuk jadwal tes dan materi latihan.</p>
+        <a href="https://ielts.idp.com" target="_blank" rel="noopener noreferrer">ielts.idp.com</a>
+      </div>
+      <div class="card src">
+        <h3>IELTS Liz</h3><span class="badge">Strategi</span>
+        <p>Pelajaran gratis dan contoh jawaban, terutama kuat untuk Writing dan Speaking.</p>
+        <a href="https://ieltsliz.com" target="_blank" rel="noopener noreferrer">ieltsliz.com</a>
+      </div>
+      <div class="card src">
+        <h3>IELTS Advantage</h3><span class="badge">Strategi</span>
+        <p>Pelajaran terstruktur per tipe soal, termasuk kerangka esai dan deskripsi grafik.</p>
+        <a href="https://www.ieltsadvantage.com" target="_blank" rel="noopener noreferrer">ieltsadvantage.com</a>
+      </div>
+      <div class="card src">
+        <h3>Magoosh IELTS</h3><span class="badge">Strategi</span>
+        <p>Blog berisi strategi tiap skill, kosakata, dan rencana belajar.</p>
+        <a href="https://magoosh.com/ielts/" target="_blank" rel="noopener noreferrer">magoosh.com/ielts</a>
+      </div>
+      <div class="card src">
+        <h3>Cambridge IELTS (buku)</h3><span class="badge">Latihan</span>
+        <p>Seri buku tes asli dari tahun-tahun sebelumnya. Cocok untuk latihan dengan waktu penuh. Dibeli sendiri, tidak disalin ke halaman ini.</p>
+      </div>
+    </div>
+
+    <p class="foot">Catatan ini bersifat pribadi dan bukan materi resmi IELTS. IELTS dimiliki bersama oleh British Council, IDP IELTS, dan Cambridge University Press &amp; Assessment.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  /* Template slots: {{x}} -> dashed fill-in blank */
+  $$('.tpl').forEach(function (el) {
+    el.innerHTML = el.innerHTML.replace(/\{\{(.+?)\}\}/g, '<span class="slot">$1</span>');
+  });
+  $$('td').forEach(function (el) {
+    if (el.innerHTML.indexOf('{{') > -1) el.innerHTML = el.innerHTML.replace(/\{\{(.+?)\}\}/g, '<span class="slot">$1</span>');
+  });
+
+  /* Tabs */
+  var tabs = ['ringkasan', 'writing', 'speaking', 'reading', 'listening', 'sumber'];
+  function show(name, user) {
+    if (tabs.indexOf(name) < 0) name = 'ringkasan';
+    tabs.forEach(function (t) {
+      var p = document.getElementById('tab-' + t), b = document.getElementById('btn-' + t);
+      p.hidden = t !== name;
+      b.setAttribute('aria-selected', t === name ? 'true' : 'false');
+      b.tabIndex = t === name ? 0 : -1;
+      if (t === name && user) {
+        var r = b.getBoundingClientRect();
+        if (r.left < 0 || r.right > window.innerWidth) b.scrollIntoView({ inline: 'center', block: 'nearest' });
+      }
+    });
+    try { localStorage.setItem('catatan-ielts-tab', name); } catch (e) {}
+    if (user) {
+      try { history.replaceState(null, '', '#' + name); } catch (e) {}
+      var h = $('.hero'), y = h ? h.offsetHeight : 0;
+      if (window.pageYOffset > y) window.scrollTo(0, y);
+    }
+  }
+  $$('.tab').forEach(function (b, i, all) {
+    b.addEventListener('click', function () { show(b.getAttribute('data-tab'), true); });
+    b.addEventListener('keydown', function (e) {
+      var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
+      if (n === null) return;
+      n = (n + all.length) % all.length;
+      all[n].focus(); show(all[n].getAttribute('data-tab'), true); e.preventDefault();
+    });
+  });
+  $$('[data-go]').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.getAttribute('data-go'), true); });
+  });
+  var start = '';
+  try { start = (location.hash || '').replace('#', ''); } catch (e) {}
+  if (tabs.indexOf(start) < 0) { try { start = localStorage.getItem('catatan-ielts-tab') || ''; } catch (e) { start = ''; } }
+  show(start, false);
+
+  /* Quiz engine */
+  function norm(s) {
+    return String(s == null ? '' : s).toLowerCase().replace(/\s+/g, ' ').trim().replace(/^£\s*/, '').replace(/\.+$/, '');
+  }
+  function buildQuiz(root, items) {
+    var qs = [], html = '';
+    items.forEach(function (it) {
+      if (it.h) {
+        html += '<div class="qh"><h4>' + it.h + '</h4><p>' + it.d + '</p>';
+        if (it.list) html += '<ul class="hlist">' + it.list.map(function (l) { return '<li><b>' + l[0] + '</b><span>' + l[1] + '</span></li>'; }).join('') + '</ul>';
+        html += '</div>';
+        return;
+      }
+      qs.push(it);
+      var n = qs.length, id = root.id + '-q' + n;
+      html += '<div class="q" id="' + id + '"><div class="qn">' + n + '</div><div><p class="qt">' + it.t.replace('______', '<span class="blank">&nbsp;</span>') + '</p>';
+      if (it.o) {
+        html += '<div class="opts" role="radiogroup" aria-label="Soal ' + n + '">';
+        it.o.forEach(function (o, j) {
+          var oid = id + '-o' + j;
+          html += '<label class="opt" for="' + oid + '"><input type="radio" id="' + oid + '" name="' + id + '" value="' + j + '"><span>' + o + '</span></label>';
+        });
+        html += '</div>';
+      } else {
+        html += '<input class="txt" type="text" id="' + id + '-in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Jawabanmu" aria-label="Jawaban soal ' + n + '">';
+      }
+      html += '<p class="res" hidden></p></div></div>';
+    });
+    html += '<div class="qbar"><button type="button" class="btn" data-act="check">Periksa jawaban</button><button type="button" class="btn ghost" data-act="reset">Ulangi</button><span class="score" aria-live="polite"></span></div>';
+    root.innerHTML = html;
+
+    function check() {
+      var right = 0;
+      qs.forEach(function (q, i) {
+        var el = document.getElementById(root.id + '-q' + (i + 1)), res = $('.res', el), ok = false, given = '';
+        if (q.o) {
+          var c = $('input:checked', el);
+          given = c ? c.value : '';
+          ok = !!c && Number(c.value) === q.a;
+        } else {
+          given = $('.txt', el).value;
+          ok = q.a.some(function (a) { return norm(a) === norm(given); });
+        }
+        el.classList.toggle('ok', ok);
+        el.classList.toggle('no', !ok);
+        var ans = q.o ? q.o[q.a] : q.a[0];
+        res.hidden = false;
+        res.innerHTML = '<b>' + (ok ? 'Benar.' : (norm(given) === '' ? 'Belum dijawab.' : 'Kurang tepat.')) + '</b> ' + (ok ? '' : 'Jawaban: <span class="ans">' + ans + '</span>. ') + q.e;
+        if (ok) right++;
+      });
+      $('.score', root).textContent = right + ' dari ' + qs.length + ' benar';
+    }
+    function reset() {
+      $$('.q', root).forEach(function (el) {
+        el.classList.remove('ok', 'no');
+        $('.res', el).hidden = true;
+        $$('input[type=radio]', el).forEach(function (r) { r.checked = false; });
+        var t = $('.txt', el); if (t) t.value = '';
+      });
+      $('.score', root).textContent = '';
+    }
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button[data-act]') : null;
+      if (!b) return;
+      if (b.getAttribute('data-act') === 'check') check(); else reset();
+    });
+  }
+
+  var TFNG = ['True', 'False', 'Not Given'];
+  var HD = ['i', 'ii', 'iii', 'iv'];
+
+  buildQuiz($('#rq'), [
+    { h: 'Soal 1–3 · True / False / Not Given', d: 'True jika sesuai teks, False jika bertentangan, Not Given jika teks tidak menyebutkannya.' },
+    { t: 'Rooftop farms first appeared in cities in the 1990s.', o: TFNG, a: 0,
+      e: 'Paragraf A menyebut rooftop farm pertama muncul dalam jumlah kecil pada 1990-an, jadi True.' },
+    { t: 'Rooftop farms are more common in Asian cities than in European ones.', o: TFNG, a: 2,
+      e: 'Teks tidak membandingkan wilayah mana pun. Tidak ada informasi berarti Not Given, jangan pakai pengetahuan sendiri.' },
+    { t: 'More than half of the farms in the 2019 survey made a profit.', o: TFNG, a: 1,
+      e: 'Paragraf C: kurang dari sepertiga yang untung. Itu bertentangan dengan pernyataan, jadi False.' },
+
+    { h: 'Soal 4–5 · Sentence completion', d: 'Lengkapi kalimat dengan SATU kata dari teks.' },
+    { t: 'Food grown on a roof reaches customers after travelling only a few ______.', a: ['metres', 'meters'],
+      e: 'Paragraf B: “only a few metres”. Ejaan British dan US sama-sama diterima di tes.' },
+    { t: 'Plants on the roof absorb ______ that would otherwise run into the drains.', a: ['rainwater'],
+      e: 'Paragraf B memakai passive (“is absorbed by the plants”), sedangkan soal memakai active. Kata bendanya tetap rainwater, satu kata.' },
+
+    { h: 'Soal 6–8 · Matching headings', d: 'Pilih judul yang paling cocok untuk tiap paragraf. Satu judul tidak dipakai.',
+      list: [['i', 'Hidden costs and practical limits'], ['ii', 'A growing response to limited space'], ['iii', 'Benefits for food, buildings and water'], ['iv', 'Why farmers left the countryside']] },
+    { t: 'Paragraph A', o: HD, a: 1,
+      e: 'Judul ii: ruang pertanian hilang dan perencana kota mulai “looking upward”. Judul iv pengecoh karena paragraf tidak membahas alasan petani meninggalkan desa.' },
+    { t: 'Paragraph B', o: HD, a: 2,
+      e: 'Judul iii: transportasi lebih hemat, bangunan lebih sejuk, air hujan terserap.' },
+    { t: 'Paragraph C', o: HD, a: 0,
+      e: 'Judul i: struktur lama tidak kuat menahan tanah basah dan biaya pemasangan tinggi.' }
+  ]);
+
+  var DIALOG = [
+    { w: 'R', x: 'Good morning, Harbour Street Community Centre, how can I help?' },
+    { w: 'C', x: 'Hi, I’d like to join the pottery workshop, please.' },
+    { w: 'R', x: 'Of course. It runs on Saturdays. Would you prefer the morning or the afternoon session?' },
+    { w: 'C', x: 'The afternoon, please. That’s at two o’clock, isn’t it?' },
+    { w: 'R', x: 'Actually, it starts at two thirty.' },
+    { w: 'C', x: 'Oh, two thirty is fine for me.' },
+    { w: 'R', x: 'Lovely. Can I take your surname?' },
+    { w: 'C', x: 'Yes, it’s Hartley. That’s H-A-R-T-L-E-Y.', s: 'Yes, it’s Hartley. That’s H, A, R, T, L, E, Y.' },
+    { w: 'R', x: 'Thank you, Ms Hartley. The fee is usually forty pounds, but as a first-time student you only pay thirty-five.' },
+    { w: 'C', x: 'That’s great. Do I need to bring anything?' },
+    { w: 'R', x: 'Just an apron. And please arrive a few minutes early, because the studio is on the second floor.' }
+  ];
+
+  buildQuiz($('#lq'), [
+    { h: 'Booking form · Pottery workshop', d: 'Lengkapi dengan SATU kata dan/atau SATU angka.' },
+    { t: 'Day of workshop: ______', a: ['saturday', 'saturdays'], e: 'Receptionist menyebut “It runs on Saturdays”.' },
+    { t: 'Start time: ______', a: ['2.30', '2:30', '2.30pm', '2:30pm', '14.30', '14:30', '230', 'two thirty', 'half past two'],
+      e: 'Pengecoh: penelepon menyebut two o’clock, lalu dikoreksi menjadi two thirty. Ambil jawaban akhir.' },
+    { t: 'Surname: ______', a: ['hartley'], e: 'Dieja H-A-R-T-L-E-Y. Ejaan harus tepat.' },
+    { t: 'Fee: £ ______', a: ['35', 'thirty-five', 'thirty five', 'thirtyfive'],
+      e: 'Pengecoh: biasanya forty pounds, tetapi siswa baru membayar thirty-five.' },
+    { t: 'Item to bring: ______', a: ['apron', 'an apron'], e: '“Just an apron.”' },
+    { t: 'The studio is on the ______ floor.', a: ['second', '2nd'], e: '“…the studio is on the second floor.”' }
+  ]);
+
+  var tr = $('#tr');
+  tr.innerHTML = DIALOG.map(function (l) { return '<p><b>' + l.w + '</b><span>' + l.x + '</span></p>'; }).join('') +
+    '<p class="meta" style="display:block;margin-top:10px">R = receptionist, C = caller</p>';
+  var trBtn = $('#toggle-tr');
+  trBtn.addEventListener('click', function () {
+    tr.hidden = !tr.hidden;
+    trBtn.setAttribute('aria-expanded', tr.hidden ? 'false' : 'true');
+    trBtn.textContent = tr.hidden ? 'Tampilkan transkrip' : 'Sembunyikan transkrip';
+  });
+
+  var synth = null;
+  try { synth = window.speechSynthesis || null; } catch (e) { synth = null; }
+  var note = $('#audio-note');
+  if (!synth || typeof window.SpeechSynthesisUtterance === 'undefined') {
+    $('#play').disabled = true; $('#stop').disabled = true;
+    note.hidden = false;
+    note.textContent = 'Browser ini tidak bisa memutar suara. Buka transkrip, lalu baca sambil menjawab.';
+  } else {
+    $('#play').addEventListener('click', function () {
+      try {
+        synth.cancel();
+        var voices = synth.getVoices().filter(function (v) { return /^en/i.test(v.lang); });
+        var i = 0;
+        (function next() {
+          if (i >= DIALOG.length) return;
+          var l = DIALOG[i++], u = new SpeechSynthesisUtterance(l.s || l.x);
+          u.lang = 'en-GB';
+          if (voices.length) u.voice = voices[(l.w === 'C' && voices.length > 1) ? 1 : 0];
+          u.pitch = l.w === 'C' ? 1.2 : 0.9;
+          u.rate = 0.95;
+          u.onend = next; u.onerror = next;
+          synth.speak(u);
+        })();
+      } catch (e) {
+        note.hidden = false;
+        note.textContent = 'Audio tidak bisa diputar di sini. Buka transkrip saja.';
+      }
+    });
+    $('#stop').addEventListener('click', function () { try { synth.cancel(); } catch (e) {} });
+  }
+
+  /* Part 2 timer */
+  var clock = $('#timer'), clockLabel = $('#timer-label'), tid = null;
+  function fmt(s) { return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  $$('[data-sec]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      clearInterval(tid);
+      var left = Number(b.getAttribute('data-sec')), label = b.getAttribute('data-label');
+      clock.classList.remove('done');
+      if (left === 0) { clock.textContent = '1:00'; clockLabel.textContent = label; return; }
+      clockLabel.textContent = label + ' berjalan';
+      clock.textContent = fmt(left);
+      tid = setInterval(function () {
+        left -= 1;
+        clock.textContent = fmt(Math.max(left, 0));
+        if (left <= 0) { clearInterval(tid); clock.classList.add('done'); clockLabel.textContent = label + ' selesai'; }
+      }, 1000);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
