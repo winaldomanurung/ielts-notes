@@ -26,7 +26,11 @@ Buka `content/writing-task2.js`, cari jenis soalnya (`opinion`, `discussion`, `p
 }
 ```
 
-Jumlah kata dihitung otomatis. Tombol esai di halaman mengikuti jumlah objek di `essays`.
+Jumlah kata dihitung otomatis. Saat ini ada 5 esai per jenis soal (25 total). Tombol esai di halaman mengikuti jumlah objek di `essays`.
+
+## Template Menulis
+
+Tab "2 · Menulis" memakai skrip baku per kalimat (Intro 2–3 kalimat, tiap Body 5 kalimat, Penutup 2 kalimat). Ubah di array `writing` pada tiap jenis soal; bagian `{{...}}` tampil sebagai slot isian.
 
 ## Catatan
 
