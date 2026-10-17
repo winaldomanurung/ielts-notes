@@ -7,6 +7,7 @@ https://winaldomanurung.github.io/ielts-notes/
 
 - `index.html` — halaman utama: tab per skill, sub-tab per task atau part, latihan Reading dan Listening.
 - `content/writing-task2.js` — semua konten Writing Task 2: contoh soal, framework berpikir, framework menulis, dan esai contoh per jenis soal.
+- `content/structure.js` — tab Structure: kalimat kompleks per fungsi, dibedah jadi kerangka (bagian tetap, slot, alternatif diksi). Tambah kalimat di array `items` pada grup yang sesuai.
 
 ## Menambah esai Task 2
 

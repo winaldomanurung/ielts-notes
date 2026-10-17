@@ -294,6 +294,30 @@ details > .in > * + * { margin-top: 10px; }
 .src a { grid-column: 1 / -1; font: 500 .85rem var(--f-mono); overflow-wrap: anywhere; }
 
 .foot { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: .88rem; max-width: 70ch; }
+
+/* Structure */
+#str .subnav { margin-bottom: 18px; }
+.gname { font: 600 1.25rem var(--f-display); margin-bottom: 4px; }
+.gname span { font: 500 .75rem var(--f-mono); color: var(--ink-2); margin-left: 8px; }
+.scard { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
+.scard header { display: flex; align-items: baseline; gap: 10px; }
+.scard h3 { font: 600 1.05rem var(--f-display); }
+.sn { font: 600 .8rem var(--f-mono); color: var(--accent); }
+.scard .use { color: var(--ink-2); margin: 4px 0 12px; font-size: .95rem; }
+.sform { font: 500 .88rem/1.7 var(--f-mono); background: var(--surface-2); border-radius: 4px; padding: 9px 12px; overflow-wrap: anywhere; }
+.sform b { color: var(--accent); }
+.sent { font-size: 1.08rem; line-height: 1.75; margin: 12px 0; }
+.sk { border-bottom: 2px solid var(--accent); font-weight: 600; }
+.sc { background: var(--mark); border-radius: 2px; padding: 0 2px; }
+.dis { border: 1px solid var(--line); border-radius: 4px; margin: 4px 0 12px; }
+.dh, .dr { display: grid; grid-template-columns: 170px minmax(0, 1.3fr) minmax(0, 1.4fr); gap: 6px 14px; padding: 9px 12px; }
+.dh { font: 500 .68rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); background: var(--surface-2); }
+.dr + .dr { border-top: 1px solid var(--line); }
+.dl { font: 600 .78rem/1.5 var(--f-mono); color: var(--accent); }
+.dim { color: var(--ink-2); font-size: .88rem; }
+.scard .note, .scard .ex2 { font-size: .93rem; margin-top: 10px; }
+.scard .tpl p { line-height: 1.8; }
+@media (max-width: 640px) { .dh { display: none; } .dr { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body>
@@ -311,6 +335,7 @@ details > .in > * + * { margin-top: 10px; }
     <div class="tabs-scroll" role="tablist">
       <button class="tab" role="tab" id="btn-ringkasan" aria-controls="tab-ringkasan" data-tab="ringkasan">Ringkasan</button>
       <button class="tab" role="tab" id="btn-writing" aria-controls="tab-writing" data-tab="writing">Writing</button>
+      <button class="tab" role="tab" id="btn-structure" aria-controls="tab-structure" data-tab="structure">Structure</button>
       <button class="tab" role="tab" id="btn-speaking" aria-controls="tab-speaking" data-tab="speaking">Speaking</button>
       <button class="tab" role="tab" id="btn-reading" aria-controls="tab-reading" data-tab="reading">Reading</button>
       <button class="tab" role="tab" id="btn-listening" aria-controls="tab-listening" data-tab="listening">Listening</button>
@@ -536,6 +561,15 @@ details > .in > * + * { margin-top: 10px; }
       </ul>
     </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ STRUCTURE ============ -->
+<section class="panel" id="tab-structure" role="tabpanel" aria-labelledby="btn-structure" hidden>
+  <div class="wrap">
+    <h2>Structure · kalimat kompleks</h2>
+    <p class="sub">Tiap kalimat dibedah menjadi kerangka: bagian yang tetap, bagian yang kamu ganti dengan idemu, dan pilihan kata pengganti. Pilih fungsi kalimat di bawah.</p>
+    <div id="str"></div>
   </div>
 </section>
 
@@ -798,6 +832,7 @@ details > .in > * + * { margin-top: 10px; }
 </main>
 
 <script src="content/writing-task2.js"></script>
+<script src="content/structure.js"></script>
 <script>
 (function () {
   function $(s, r) { return (r || document).querySelector(s); }
@@ -812,7 +847,7 @@ details > .in > * + * { margin-top: 10px; }
   });
 
   /* Tabs */
-  var tabs = ['ringkasan', 'writing', 'speaking', 'reading', 'listening', 'sumber'];
+  var tabs = ['ringkasan', 'writing', 'structure', 'speaking', 'reading', 'listening', 'sumber'];
   function show(name, user) {
     if (tabs.indexOf(name) < 0) name = 'ringkasan';
     tabs.forEach(function (t) {
