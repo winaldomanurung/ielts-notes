@@ -1,0 +1,87 @@
+/* Tab Speaking: Bank soal, Mock test, Grammar lisan, Kosakata, Kriteria & band.
+   Memakai token warna dari index.html (--accent, --surface, dll.), jadi tema terang dan gelap ikut otomatis. */
+
+#tab-speaking .subnav[data-group="speaking"] { margin-bottom: 4px; }
+.sp-h { margin-top: 30px; }
+.subpanel > .sp-h:first-child { margin-top: 0; }
+.sp-tag { font: 500 .68rem/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); border: 1px solid var(--line); border-radius: 3px; padding: 3px 6px; white-space: nowrap; vertical-align: middle; margin-left: 6px; }
+.scard header .sp-tag { margin-left: auto; }
+.sp-q { font: 600 clamp(1.25rem, 3.6vw, 1.6rem)/1.35 var(--f-display); letter-spacing: -.01em; text-wrap: balance; }
+.sp-examiner { font-size: 1.08rem; line-height: 1.7; font-style: italic; }
+.sp-clockrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
+.sp-clockrow .tbtns { margin-top: 8px; }
+.sp-clock { font-size: 2.4rem; }
+.sp-clock.sp-over { color: var(--ink-2); }
+.sp-ol { margin: 0; padding-left: 1.4em; }
+.sp-ol li + li { margin-top: 6px; }
+.sp-ol li::marker { font: 600 .85rem var(--f-mono); color: var(--accent); }
+.sp-topics { display: grid; gap: 8px; }
+.sp-topics summary { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+
+/* Bank soal */
+.sp-drill > * + * { margin-top: 14px; }
+.sp-drill-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.sp-cue h3 { font-size: 1.2rem; }
+.sp-browse-nav { margin-top: 10px; }
+.sp-cats { margin-top: 4px; }
+.sp-chip { cursor: pointer; font: inherit; font-size: .88rem; color: var(--ink); }
+.sp-chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+/* Mock test */
+.sp-mintro > * + * { margin-top: 12px; }
+.sp-voice { margin-top: 4px; }
+.sp-mhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.sp-parts { display: flex; gap: 4px; }
+.sp-pp { font: 600 .78rem/1 var(--f-mono); padding: 7px 10px; border-radius: 3px; border: 1px solid var(--line); color: var(--ink-2); }
+.sp-pp.done { background: var(--surface-2); }
+.sp-pp.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.sp-total { font-variant-numeric: tabular-nums; }
+.sp-stage { padding: 24px; }
+.sp-stage > * + * { margin-top: 16px; }
+.sp-cardstage .card > * + * { margin-top: 12px; }
+.sp-notes { display: block; width: 100%; font: 400 1rem/1.5 var(--f-body); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; resize: vertical; }
+.sp-round { color: var(--ink); font-size: .95rem; }
+.sp-sum > * + * { margin-top: 10px; }
+.sp-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.sp-stats div { border-top: 2px solid var(--accent); padding-top: 6px; }
+.sp-stats b { display: block; font: 500 1.6rem/1.1 var(--f-mono); }
+.sp-stats span { font: 400 .78rem var(--f-mono); color: var(--ink-2); }
+.sp-table td:first-child { white-space: normal; }
+.sp-num { font-family: var(--f-mono); white-space: nowrap; }
+.sp-flag { font: 500 .75rem var(--f-mono); color: var(--bad); background: var(--bad-bg); padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+.sp-pre { margin: 0; white-space: pre-wrap; font: 400 .95rem/1.6 var(--f-mono); }
+.sp-check { display: flex; align-items: flex-start; width: 100%; }
+.sp-check input { margin-top: 4px; }
+
+/* Grammar & kosakata */
+.sp-gr-body .subnav.inner, .sp-voc-topic .subnav.inner { margin-bottom: 16px; }
+.sp-ex { font-style: italic; }
+.sp-err > * + * { margin-top: 8px; }
+.sp-wrong, .sp-right { font: 500 .92rem/1.5 var(--f-mono); padding: 6px 10px; border-radius: 3px; }
+.sp-wrong { background: var(--bad-bg); color: var(--bad); text-decoration: line-through; text-decoration-thickness: 1px; }
+.sp-right { background: var(--ok-bg); color: var(--ok); }
+
+/* Kriteria & band */
+.sp-notes-list { max-width: 70ch; }
+.sp-target > * + * { margin-top: 10px; }
+.sp-bands { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); margin-top: 18px; }
+.sp-crit > * + * { margin-top: 10px; }
+.sp-blist { border: 1px solid var(--line); border-radius: 4px; }
+.sp-brow { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; padding: 9px 12px; font-size: .93rem; line-height: 1.55; }
+.sp-brow + .sp-brow { border-top: 1px solid var(--line); }
+.sp-brow b { font: 600 .95rem var(--f-mono); color: var(--ink-2); }
+.sp-brow.on { background: var(--tint-a); }
+.sp-brow.on b { color: var(--accent); }
+.sp-up { border-left: 3px solid var(--accent); padding: 4px 0 4px 12px; }
+.sp-up p:last-child { margin-top: 4px; }
+.sp-src { margin-top: 18px; }
+
+/* Jarak antar blok di dalam kontainer yang dirender skrip */
+#sp-bank > * + *, #sp-mock > * + *, #sp-grammar > * + *, #sp-vocab > * + *, #sp-band > * + *,
+.sp-gr-body > * + *, .sp-voc-topic > * + * { margin-top: 18px; }
+#sp-band > h2 + .sub { margin-top: 10px; }
+#sp-bank .sp-h, #sp-grammar .sp-h, #sp-vocab .sp-h { margin-top: 34px; }
+#sp-vocab > .sp-h:first-child { margin-top: 0; }
+.sp-browse-nav + * { margin-top: 14px; }
+.sp-table { min-width: 0; }
+.sp-table td:first-child { font-weight: 600; }

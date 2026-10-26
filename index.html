@@ -73,6 +73,7 @@ img{max-width:100%}
 .tleg { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 8px; font: 400 .78rem var(--f-mono); color: var(--ink-2); }
 </style>
 <title>Catatan IELTS</title>
+<link rel="stylesheet" href="content/speaking.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root {
@@ -377,7 +378,7 @@ details > .in > * + * { margin-top: 10px; }
       <div class="card skill">
         <p class="label">Skill 2</p>
         <h3>Speaking</h3>
-        <p>Part 1 perkenalan, Part 2 kartu topik (1 mnt siap, 1–2 mnt bicara), Part 3 diskusi abstrak.</p>
+        <p>Part 1 perkenalan, Part 2 kartu topik (1 mnt siap, 1–2 mnt bicara), Part 3 diskusi abstrak. Ada bank soal, mock test, grammar lisan, kosakata, dan kriteria per band.</p>
         <button class="btn link" data-go="speaking">Buka catatan Speaking →</button>
       </div>
       <div class="card skill">
@@ -580,7 +581,11 @@ details > .in > * + * { margin-top: 10px; }
       <button type="button" class="sbtn" data-for="speaking-0" aria-pressed="true">Part 1</button>
       <button type="button" class="sbtn" data-for="speaking-1" aria-pressed="false">Part 2</button>
       <button type="button" class="sbtn" data-for="speaking-2" aria-pressed="false">Part 3</button>
-      <button type="button" class="sbtn" data-for="speaking-3" aria-pressed="false">Kriteria</button>
+      <button type="button" class="sbtn" data-for="speaking-bank" aria-pressed="false">Bank soal</button>
+      <button type="button" class="sbtn" data-for="speaking-mock" aria-pressed="false">Mock test</button>
+      <button type="button" class="sbtn" data-for="speaking-grammar" aria-pressed="false">Grammar lisan</button>
+      <button type="button" class="sbtn" data-for="speaking-vocab" aria-pressed="false">Kosakata</button>
+      <button type="button" class="sbtn" data-for="speaking-3" aria-pressed="false">Kriteria &amp; band</button>
     </div>
     <div class="subpanel" data-group="speaking" id="speaking-0">
 <h2>Part 1 · Perkenalan</h2>
@@ -670,14 +675,27 @@ details > .in > * + * { margin-top: 10px; }
 
     
     </div>
-    <div class="subpanel" data-group="speaking" id="speaking-3" hidden>
-<h2>Empat kriteria</h2>
-    <div class="grid">
-      <div class="card"><p class="label">25%</p><h3>Fluency &amp; Coherence</h3><p>Bicara mengalir dan jawaban berkembang. Jeda sesekali untuk berpikir wajar; mengulang-ulang kata yang sama tidak.</p></div>
-      <div class="card"><p class="label">25%</p><h3>Lexical Resource</h3><p>Variasi kosakata dan kemampuan memparafrase. Satu idiom yang pas lebih baik daripada lima yang dipaksakan.</p></div>
-      <div class="card"><p class="label">25%</p><h3>Grammatical Range &amp; Accuracy</h3><p>Pakai tense yang berbeda dan kalimat kompleks, dengan kesalahan yang tidak mengganggu makna.</p></div>
-      <div class="card"><p class="label">25%</p><h3>Pronunciation</h3><p>Yang dinilai kejelasan, tekanan kata, dan intonasi. Aksen tertentu tidak dituntut.</p></div>
+    <div class="subpanel" data-group="speaking" id="speaking-bank" hidden>
+      <h2>Bank soal</h2>
+      <p class="sub">Latih satu soal acak dengan timer, atau buka semua soal per topik dan per kartu. Part 3 di setiap kartu nyambung dengan topik kartunya, seperti di tes asli.</p>
+      <div id="sp-bank"><p class="sub">Memuat bank soal…</p></div>
     </div>
+    <div class="subpanel" data-group="speaking" id="speaking-mock" hidden>
+      <h2>Mock test</h2>
+      <p class="sub">Simulasi tiga part berturut-turut dengan soal acak. Di akhir ada ringkasan waktu tiap jawaban dan checklist untuk menilai rekamanmu.</p>
+      <div id="sp-mock"><p class="sub">Memuat mock test…</p></div>
+    </div>
+    <div class="subpanel" data-group="speaking" id="speaking-grammar" hidden>
+      <h2>Grammar lisan</h2>
+      <p class="sub">Pola kalimat yang natural diucapkan, terpisah dari tab Structure yang khusus Writing. Tiap pola punya slot isian, contoh jawaban, dan catatan jebakan.</p>
+      <div id="sp-grammar"><p class="sub">Memuat grammar…</p></div>
+    </div>
+    <div class="subpanel" data-group="speaking" id="speaking-vocab" hidden>
+      <h2>Kosakata</h2>
+      <div id="sp-vocab"><p class="sub">Memuat kosakata…</p></div>
+    </div>
+    <div class="subpanel" data-group="speaking" id="speaking-3" hidden>
+      <div id="sp-band"><p class="sub">Memuat kriteria…</p></div>
     </div>
   </div>
 </section>
@@ -833,6 +851,10 @@ details > .in > * + * { margin-top: 10px; }
 
 <script src="content/writing-task2.js"></script>
 <script src="content/structure.js"></script>
+<script src="content/speaking-bank.js"></script>
+<script src="content/speaking-language.js"></script>
+<script src="content/speaking-band.js"></script>
+<script src="content/speaking.js"></script>
 <script>
 (function () {
   function $(s, r) { return (r || document).querySelector(s); }
